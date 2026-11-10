@@ -1,0 +1,25 @@
+.cozy-navbar {
+  background-color: #e8eadc;
+  padding: 16px 0;
+  border-bottom: 1px solid #d9ddcc;
+}
+
+.cozy-navbar .navbar-brand {
+  color: #59694f;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.cozy-navbar .nav-link {
+  color: #626b58;
+  margin-left: 12px;
+}
+
+.cozy-navbar .nav-link:hover {
+  color: #a77e75;
+}
+
+.cozy-navbar .nav-link.active {
+  color: #a77e75;
+  font-weight: bold;
+}

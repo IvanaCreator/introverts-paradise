@@ -4,5 +4,11 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  background-color: #f7f5ed;
+  color: #4d5142;
+  font-family: Georgia, serif;
+}
+
+h1 {
+  color: #68775b;
 }
