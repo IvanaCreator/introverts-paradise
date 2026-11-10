@@ -15,21 +15,26 @@ function Home() {
 
   return (
     <div className="home-page">
+      <section className="welcome-section">
+        <div className="welcome-content">
+          <p className="welcome-label">A LITTLE PLACE JUST FOR YOU</p>
 
-      {/* Welcome section */}
-      <section className="welcome-section text-center">
-        <p className="welcome-label">A LITTLE PLACE JUST FOR YOU</p>
+          <h1>Welcome to Your Cozy Corner</h1>
 
-        <h1>Welcome to Your Cozy Corner</h1>
+          <p className="welcome-text">
+            A peaceful little space to slow down, dream, create and enjoy the
+            little things in life.
+          </p>
+        </div>
 
-        <p className="welcome-text">
-          A peaceful little space to slow down, dream,
-          create and enjoy the little things in life.
-        </p>
+        <div className="welcome-image-frame">
+          <img
+            src="/welcome.jpeg"
+            alt="A warm and cozy home interior"
+          />
+        </div>
       </section>
 
-
-      {/* Daily quote */}
       <section className="quote-card">
         <p className="section-label">A LITTLE REMINDER</p>
 
@@ -43,9 +48,7 @@ function Home() {
           — {quote.author}
         </p>
       </section>
-      
 
-      {/* Daily inspiration */}
       <section className="inspiration-card text-center">
         <p className="section-label">YOUR DAILY INSPIRATION</p>
 
@@ -53,7 +56,6 @@ function Home() {
 
         <p>{inspiration}</p>
       </section>
-
     </div>
   );
 }
