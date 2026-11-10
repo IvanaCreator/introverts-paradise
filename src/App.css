@@ -23,3 +23,82 @@
   color: #a77e75;
   font-weight: bold;
 }
+
+/* HOME PAGE */
+
+.home-page {
+  padding-bottom: 40px;
+}
+
+/* Welcome */
+
+.welcome-section {
+  padding: 65px 20px 55px;
+}
+
+.welcome-label,
+.section-label {
+  color: #a18b78;
+  letter-spacing: 3px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.welcome-section h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  margin: 18px 0;
+  color: #68775b;
+}
+
+.welcome-text {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #777568;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* Quote card */
+
+.quote-card {
+  background-color: #e8eadc;
+  border-radius: 22px;
+  padding: 35px;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 30px;
+}
+
+.quote-card h2,
+.inspiration-card h2,
+.explore-section h2 {
+  color: #68775b;
+  font-size: 26px;
+  margin: 12px 0 20px;
+}
+
+.quote-card blockquote {
+  font-size: 20px;
+  font-style: italic;
+  color: #555b4b;
+  line-height: 1.7;
+}
+
+.quote-author {
+  color: #8d8576;
+  margin-top: 15px;
+}
+
+/* Inspiration */
+
+.inspiration-card {
+  background-color: #f0e6df;
+  border-radius: 22px;
+  padding: 30px 20px;
+  margin-bottom: 65px;
+}
+
+.inspiration-card p:last-child {
+  color: #6f675e;
+  font-size: 17px;
+}
