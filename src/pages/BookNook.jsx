@@ -4,7 +4,7 @@ import BookCard from "../components/BookCard";
 import BookSearch from "../components/BookSearch";
 
 const OPEN_LIBRARY_URL = "https://openlibrary.org/search.json";
-const BOOKS_PER_PAGE = 12;
+const BOOKS_PER_PAGE = 15;
 const MAX_PAGES = 3;
 
 async function searchBooks(query, currentPage, signal) {
@@ -84,7 +84,7 @@ function BookNook() {
   }
 
   return (
-    <section>
+    <section className="book-nook-page">
       <h1>Book Nook</h1>
 
       <BookSearch
@@ -93,12 +93,14 @@ function BookNook() {
         onSubmit={handleSubmit}
       />
 
-      {isLoading && <p>Loading books...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <p className="book-status">Loading books...</p>}
+      {error && <p className="book-status book-error">{error}</p>}
 
       {!isLoading && !error && (
         <>
-          {searchTerm && books.length === 0 && <p>No books found.</p>}
+          {searchTerm && books.length === 0 && (
+            <p className="book-status">No books found.</p>
+          )}
 
           {books.length > 0 && (
             <>
@@ -108,7 +110,7 @@ function BookNook() {
                 ))}
               </ul>
 
-              <nav aria-label="Book search pages">
+              <nav className="book-pagination" aria-label="Book search pages">
                 <button
                   type="button"
                   onClick={() => handlePageChange(currentPage - 1)}
