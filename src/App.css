@@ -380,7 +380,7 @@
 /* JOURNAL */
 
 .journal-page {
-  max-width: 900px;
+  max-width: 1000px;
   padding-bottom: 48px;
   color: #6f675e;
 }
@@ -393,6 +393,14 @@
 .journal-page h1 {
   margin-bottom: 32px;
   font-size: clamp(36px, 5vw, 52px);
+}
+
+.journal-intro {
+  max-width: 760px;
+  margin: -16px 0 36px;
+  color: #777568;
+  font-size: 18px;
+  line-height: 1.7;
 }
 
 .journal-feature-row {
@@ -475,6 +483,13 @@
   background-color: rgba(240, 230, 223, 0.72);
   border: 1px solid #ead8ce;
   border-radius: 22px;
+}
+
+.journal-section-intro {
+  margin: -4px 0 22px;
+  color: #8d8576;
+  line-height: 1.7;
+  white-space: nowrap;
 }
 
 .journal-entry-list {
@@ -603,6 +618,10 @@
   .journal-image-frame {
     width: min(100%, 300px);
     height: 220px;
+  }
+
+  .journal-section-intro {
+    white-space: normal;
   }
 
 }

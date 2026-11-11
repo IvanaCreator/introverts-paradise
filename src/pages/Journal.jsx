@@ -113,6 +113,11 @@ function Journal() {
   return (
     <section className="journal-page container">
       <h1 className="mb-4">My Journal</h1>
+      <p className="journal-intro">
+        A quiet space for your thoughts, dreams and everything in between. Take
+        a moment for yourself, let your thoughts flow and remember that every
+        little feeling deserves a place.
+      </p>
 
       <div className="journal-feature-row journal-writing-row">
         <div className="journal-image-frame">
@@ -122,7 +127,7 @@ function Journal() {
         <form className="journal-form mb-5" onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label" htmlFor="journal-entry">
-              Your entry
+              Today's thoughts
             </label>
             <textarea
               className="form-control"
@@ -167,7 +172,7 @@ function Journal() {
           </div>
 
           <button className="btn btn-success" type="submit">
-            Save entry
+            Save my thoughts
           </button>
         </form>
       </div>
@@ -180,6 +185,9 @@ function Journal() {
           <h2 className="mb-3" id="journal-history-heading">
             Journal history
           </h2>
+          <p className="journal-section-intro">
+            Look back on the days you've captured and see how far you've come.
+          </p>
 
           {entries.length === 0 ? (
             <p className="journal-empty">No journal entries yet.</p>
@@ -229,7 +237,7 @@ function Journal() {
               type="text"
               value={taskText}
               onChange={(event) => setTaskText(event.target.value)}
-              placeholder="Add a new task..."
+              placeholder="Add something to your little dream list..."
               required
             />
           </div>
