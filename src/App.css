@@ -153,18 +153,44 @@
 /* BOOK NOOK */
 
 .book-nook-page h1 {
-  margin-bottom: 28px;
+  margin-bottom: 12px;
   color: #68775b;
 }
 
+.book-nook-intro {
+  max-width: 900px;
+  margin-bottom: 44px;
+  color: #777568;
+  font-size: 20px;
+  line-height: 1.7;
+  white-space: nowrap;
+}
+
+.book-search-section {
+  max-width: 900px;
+  margin-bottom: 36px;
+}
+
+.book-search-section h2,
 .favorites-section {
   margin-bottom: 36px;
 }
 
+.book-search-section h2,
 .favorites-section h2 {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   color: #68775b;
-  font-size: 26px;
+  font-size: 30px;
+}
+
+.book-search-section > p,
+.favorites-intro {
+  max-width: 900px;
+  margin-bottom: 22px;
+  color: #8d8576;
+  font-size: 18px;
+  line-height: 1.7;
+  white-space: nowrap;
 }
 
 .book-search-form {
@@ -375,6 +401,12 @@
 
   .book-search-form {
     max-width: 100%;
+  }
+
+  .book-nook-intro,
+  .book-search-section > p,
+  .favorites-intro {
+    white-space: normal;
   }
 
   .book-search-controls {

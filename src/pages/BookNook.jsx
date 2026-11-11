@@ -130,12 +130,23 @@ function BookNook() {
   return (
     <section className="book-nook-page">
       <h1>Book Nook</h1>
+      <p className="book-nook-intro">
+        Discover new stories, find your next favourite read and get lost in
+        the magic of books.
+      </p>
 
-      <BookSearch
-        value={searchInput}
-        onChange={(event) => setSearchInput(event.target.value)}
-        onSubmit={handleSubmit}
-      />
+      <section className="book-search-section" aria-labelledby="search-heading">
+        <h2 id="search-heading">Find your next little escape</h2>
+        <p>
+          Search for a book by its title or author and discover a story worth
+          getting lost in.
+        </p>
+        <BookSearch
+          value={searchInput}
+          onChange={(event) => setSearchInput(event.target.value)}
+          onSubmit={handleSubmit}
+        />
+      </section>
 
       <div className="book-results">
         {isLoading && <p className="book-status">Loading books...</p>}
@@ -204,6 +215,9 @@ function BookNook() {
 
       <section className="favorites-section" aria-labelledby="favorites-heading">
         <h2 id="favorites-heading">My favorites</h2>
+        <p className="favorites-intro">
+          A collection of stories that caught my heart.
+        </p>
         {favorites.length > 0 ? (
           <ul className="book-grid row g-4 list-unstyled p-0 mt-4 mb-4">
             {favorites.map((book) => (
