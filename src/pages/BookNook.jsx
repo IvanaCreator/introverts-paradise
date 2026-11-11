@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 
+import BookCard from "../components/BookCard";
 import BookSearch from "../components/BookSearch";
 
 const OPEN_LIBRARY_URL = "https://openlibrary.org/search.json";
+const BOOKS_PER_PAGE = 12;
+const MAX_PAGES = 3;
 
 async function searchBooks(query, currentPage, signal) {
   const params = new URLSearchParams({
     q: query,
-    limit: "12",
+    limit: String(BOOKS_PER_PAGE),
     page: String(currentPage),
   });
 
@@ -20,7 +23,10 @@ async function searchBooks(query, currentPage, signal) {
   const data = await response.json();
   return {
     books: data.docs,
-    totalPages: Math.min(3, Math.ceil(data.numFound / 12)),
+    totalPages: Math.min(
+      MAX_PAGES,
+      Math.ceil(data.numFound / BOOKS_PER_PAGE)
+    ),
   };
 }
 
@@ -96,12 +102,9 @@ function BookNook() {
 
           {books.length > 0 && (
             <>
-              <ul>
+              <ul className="book-grid">
                 {books.map((book) => (
-                  <li key={book.key}>
-                    <strong>{book.title}</strong>
-                    {book.author_name && <span> — {book.author_name[0]}</span>}
-                  </li>
+                  <BookCard key={book.key} book={book} />
                 ))}
               </ul>
 
