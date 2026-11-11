@@ -377,6 +377,133 @@
   cursor: default;
 }
 
+/* JOURNAL */
+
+.journal-page {
+  max-width: 900px;
+  padding-bottom: 48px;
+  color: #6f675e;
+}
+
+.journal-page h1,
+.journal-page h2 {
+  color: #68775b;
+}
+
+.journal-page h1 {
+  margin-bottom: 32px;
+  font-size: clamp(36px, 5vw, 52px);
+}
+
+.journal-page h2 {
+  font-size: 28px;
+}
+
+.journal-form,
+.bucket-list-section {
+  padding: clamp(24px, 4vw, 36px);
+  background-color: rgba(232, 234, 220, 0.78);
+  border: 1px solid #d9ddcc;
+  border-radius: 22px;
+  box-shadow: 0 10px 24px rgba(104, 119, 91, 0.08);
+}
+
+.journal-page .form-label {
+  color: #59694f;
+  font-weight: bold;
+}
+
+.journal-page .form-control,
+.journal-page .form-select {
+  background-color: rgba(255, 253, 247, 0.9);
+  border-color: #d9ddcc;
+  color: #4d5142;
+}
+
+.journal-page .form-control:focus,
+.journal-page .form-select:focus {
+  border-color: #a77e75;
+  box-shadow: 0 0 0 0.2rem rgba(167, 126, 117, 0.18);
+}
+
+.journal-page .btn-success {
+  background-color: #68775b;
+  border-color: #68775b;
+}
+
+.journal-page .btn-success:hover {
+  background-color: #59694f;
+  border-color: #59694f;
+}
+
+.journal-history {
+  padding: clamp(24px, 4vw, 36px);
+  background-color: rgba(240, 230, 223, 0.72);
+  border: 1px solid #ead8ce;
+  border-radius: 22px;
+}
+
+.journal-entry-list {
+  gap: 14px;
+}
+
+.journal-entry-list .list-group-item {
+  padding: 22px;
+  background-color: rgba(255, 253, 247, 0.9);
+  border: 1px solid #e4dfd1;
+  border-radius: 14px;
+  color: #6f675e;
+}
+
+.journal-entry-list p {
+  margin-bottom: 8px;
+}
+
+.journal-entry-list p:first-child {
+  color: #555b4b;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.journal-entry-list strong {
+  color: #68775b;
+}
+
+.journal-page .btn-outline-danger {
+  border-color: #c98d88;
+  color: #a35f59;
+}
+
+.journal-page .btn-outline-danger:hover {
+  background-color: #a35f59;
+  border-color: #a35f59;
+  color: #fffdf7;
+}
+
+.bucket-list-section > p {
+  margin-bottom: 24px;
+  color: #8d8576;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.bucket-list-section .card {
+  background-color: rgba(255, 253, 247, 0.9);
+  border: 1px solid #e4dfd1;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(104, 119, 91, 0.07);
+}
+
+.bucket-list-section .card-text {
+  color: #555b4b;
+  line-height: 1.5;
+}
+
+.journal-empty {
+  color: #8d8576;
+  font-style: italic;
+}
+
 @media (max-width: 767px) {
   .welcome-section {
     grid-template-columns: 1fr;

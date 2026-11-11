@@ -111,10 +111,10 @@ function Journal() {
   }
 
   return (
-    <section className="container">
+    <section className="journal-page container">
       <h1 className="mb-4">My Journal</h1>
 
-      <form className="mb-5" onSubmit={handleSubmit}>
+      <form className="journal-form mb-5" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label" htmlFor="journal-entry">
             Your entry
@@ -166,15 +166,18 @@ function Journal() {
         </button>
       </form>
 
-      <section className="mb-5" aria-labelledby="journal-history-heading">
+      <section
+        className="journal-history mb-5"
+        aria-labelledby="journal-history-heading"
+      >
         <h2 className="mb-3" id="journal-history-heading">
           Journal history
         </h2>
 
         {entries.length === 0 ? (
-          <p>No journal entries yet.</p>
+          <p className="journal-empty">No journal entries yet.</p>
         ) : (
-          <ul className="list-group">
+          <ul className="journal-entry-list list-group">
             {entries.map((entry) => (
               <li className="list-group-item" key={entry.id}>
                 <p>{entry.text}</p>
@@ -197,7 +200,7 @@ function Journal() {
         )}
       </section>
 
-      <section aria-labelledby="bucket-list-heading">
+      <section className="bucket-list-section" aria-labelledby="bucket-list-heading">
         <h2 className="mb-2" id="bucket-list-heading">
           My Bucket List
         </h2>
@@ -226,7 +229,7 @@ function Journal() {
         </form>
 
         {tasks.length === 0 ? (
-          <p>Your bucket list is empty.</p>
+          <p className="journal-empty">Your bucket list is empty.</p>
         ) : (
           <div className="row g-3">
             {tasks.map((task) => (
