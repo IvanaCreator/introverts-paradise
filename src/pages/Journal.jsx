@@ -1,46 +1,54 @@
 import { useEffect, useState } from "react";
 
+import BucketListForm from "../components/BucketListForm";
+import BucketListItem from "../components/BucketListItem";
+import JournalEntryCard from "../components/JournalEntryCard";
+import JournalEntryForm from "../components/JournalEntryForm";
+
 const JOURNAL_STORAGE_KEY = "introverts-paradise-journal";
 const BUCKET_LIST_STORAGE_KEY = "introverts-paradise-bucket-list";
-const MOODS = ["happy", "calm", "tired", "excited", "sad", "stressed", "thoughtful", "hungry", "normal"];
+const MOODS = [
+  "happy",
+  "calm",
+  "tired",
+  "excited",
+  "sad",
+  "stressed",
+  "thoughtful",
+  "hungry",
+  "normal",
+];
 
 function getToday() {
   return new Date().toISOString().slice(0, 10);
+}
+
+function readStoredList(storageKey) {
+  const storedItems = localStorage.getItem(storageKey);
+
+  if (!storedItems) {
+    return [];
+  }
+
+  try {
+    const parsedItems = JSON.parse(storedItems);
+    return Array.isArray(parsedItems) ? parsedItems : [];
+  } catch {
+    return [];
+  }
 }
 
 function Journal() {
   const [entryText, setEntryText] = useState("");
   const [mood, setMood] = useState(MOODS[0]);
   const [entryDate, setEntryDate] = useState(getToday);
-  const [entries, setEntries] = useState(() => {
-    const storedEntries = localStorage.getItem(JOURNAL_STORAGE_KEY);
-
-    if (!storedEntries) {
-      return [];
-    }
-
-    try {
-      const parsedEntries = JSON.parse(storedEntries);
-      return Array.isArray(parsedEntries) ? parsedEntries : [];
-    } catch {
-      return [];
-    }
-  });
+  const [entries, setEntries] = useState(() =>
+    readStoredList(JOURNAL_STORAGE_KEY)
+  );
   const [taskText, setTaskText] = useState("");
-  const [tasks, setTasks] = useState(() => {
-    const storedTasks = localStorage.getItem(BUCKET_LIST_STORAGE_KEY);
-
-    if (!storedTasks) {
-      return [];
-    }
-
-    try {
-      const parsedTasks = JSON.parse(storedTasks);
-      return Array.isArray(parsedTasks) ? parsedTasks : [];
-    } catch {
-      return [];
-    }
-  });
+  const [tasks, setTasks] = useState(() =>
+    readStoredList(BUCKET_LIST_STORAGE_KEY)
+  );
 
   useEffect(() => {
     localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(entries));
@@ -52,21 +60,21 @@ function Journal() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     const text = entryText.trim();
 
     if (!text) {
       return;
     }
 
-    const newEntry = {
-      id: Date.now(),
-      text,
-      mood,
-      date: entryDate,
-    };
-
-    setEntries((currentEntries) => [newEntry, ...currentEntries]);
+    setEntries((currentEntries) => [
+      {
+        id: Date.now(),
+        text,
+        mood,
+        date: entryDate,
+      },
+      ...currentEntries,
+    ]);
     setEntryText("");
   }
 
@@ -78,7 +86,6 @@ function Journal() {
 
   function handleTaskSubmit(event) {
     event.preventDefault();
-
     const text = taskText.trim();
 
     if (!text) {
@@ -121,60 +128,22 @@ function Journal() {
 
       <div className="journal-feature-row journal-writing-row">
         <div className="journal-image-frame">
-          <img src="/open-journal.jpeg" alt="An open journal ready for writing" />
+          <img
+            src="/open-journal.jpeg"
+            alt="An open journal ready for writing"
+          />
         </div>
 
-        <form className="journal-form mb-5" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="journal-entry">
-              Today's thoughts
-            </label>
-            <textarea
-              className="form-control"
-              id="journal-entry"
-              value={entryText}
-              onChange={(event) => setEntryText(event.target.value)}
-              placeholder="Write a little about your day..."
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label" htmlFor="journal-mood">
-              Mood
-            </label>
-            <select
-              className="form-select"
-              id="journal-mood"
-              value={mood}
-              onChange={(event) => setMood(event.target.value)}
-            >
-              {MOODS.map((moodOption) => (
-                <option key={moodOption} value={moodOption}>
-                  {moodOption}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label" htmlFor="journal-date">
-              Date
-            </label>
-            <input
-              className="form-control"
-              id="journal-date"
-              type="date"
-              value={entryDate}
-              onChange={(event) => setEntryDate(event.target.value)}
-              required
-            />
-          </div>
-
-          <button className="btn btn-success" type="submit">
-            Save my thoughts
-          </button>
-        </form>
+        <JournalEntryForm
+          entryText={entryText}
+          mood={mood}
+          entryDate={entryDate}
+          moods={MOODS}
+          onTextChange={(event) => setEntryText(event.target.value)}
+          onMoodChange={(event) => setMood(event.target.value)}
+          onDateChange={(event) => setEntryDate(event.target.value)}
+          onSubmit={handleSubmit}
+        />
       </div>
 
       <div className="journal-feature-row journal-history-row">
@@ -194,22 +163,11 @@ function Journal() {
           ) : (
             <ul className="journal-entry-list list-group">
               {entries.map((entry) => (
-                <li className="list-group-item" key={entry.id}>
-                  <p>{entry.text}</p>
-                  <p>
-                    <strong>Mood:</strong> {entry.mood}
-                  </p>
-                  <p>
-                    <strong>Date:</strong> {entry.date}
-                  </p>
-                  <button
-                    className="btn btn-outline-danger"
-                    type="button"
-                    onClick={() => handleDelete(entry.id)}
-                  >
-                    Delete
-                  </button>
-                </li>
+                <JournalEntryCard
+                  key={entry.id}
+                  entry={entry}
+                  onDelete={handleDelete}
+                />
               ))}
             </ul>
           )}
@@ -220,67 +178,32 @@ function Journal() {
         </div>
       </div>
 
-      <section className="bucket-list-section" aria-labelledby="bucket-list-heading">
+      <section
+        className="bucket-list-section"
+        aria-labelledby="bucket-list-heading"
+      >
         <h2 className="mb-2" id="bucket-list-heading">
           My Bucket List
         </h2>
         <p>Things I would like to try someday.</p>
 
-        <form className="row g-2 mb-4" onSubmit={handleTaskSubmit}>
-          <div className="col-12 col-md">
-            <label className="visually-hidden" htmlFor="bucket-list-task">
-              New bucket list task
-            </label>
-            <input
-              className="form-control"
-              id="bucket-list-task"
-              type="text"
-              value={taskText}
-              onChange={(event) => setTaskText(event.target.value)}
-              placeholder="Add something to your little dream list..."
-              required
-            />
-          </div>
-          <div className="col-12 col-md-auto">
-            <button className="btn btn-success w-100" type="submit">
-              Add task
-            </button>
-          </div>
-        </form>
+        <BucketListForm
+          taskText={taskText}
+          onTaskChange={(event) => setTaskText(event.target.value)}
+          onSubmit={handleTaskSubmit}
+        />
 
         {tasks.length === 0 ? (
           <p className="journal-empty">Your bucket list is empty.</p>
         ) : (
           <div className="row g-3">
             {tasks.map((task) => (
-              <div className="col-12 col-md-6" key={task.id}>
-                <article className="card h-100">
-                  <div className="card-body d-flex align-items-center gap-3">
-                    <input
-                      className="form-check-input flex-shrink-0"
-                      type="checkbox"
-                      id={`task-${task.id}`}
-                      checked={task.completed}
-                      onChange={() => handleTaskToggle(task.id)}
-                    />
-                    <label
-                      className={`card-text flex-grow-1 ${
-                        task.completed ? "text-decoration-line-through" : ""
-                      }`}
-                      htmlFor={`task-${task.id}`}
-                    >
-                      {task.text}
-                    </label>
-                    <button
-                      className="btn btn-outline-danger btn-sm"
-                      type="button"
-                      onClick={() => handleTaskDelete(task.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </article>
-              </div>
+              <BucketListItem
+                key={task.id}
+                task={task}
+                onToggle={handleTaskToggle}
+                onDelete={handleTaskDelete}
+              />
             ))}
           </div>
         )}
