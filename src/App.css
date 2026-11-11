@@ -149,6 +149,16 @@
   color: #68775b;
 }
 
+.favorites-section {
+  margin-bottom: 36px;
+}
+
+.favorites-section h2 {
+  margin-bottom: 16px;
+  color: #68775b;
+  font-size: 26px;
+}
+
 .book-search-form {
   display: block;
   max-width: 720px;
@@ -244,6 +254,7 @@
 }
 
 .book-cover {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,6 +270,39 @@
   height: 270px;
   object-fit: contain;
   border-radius: 8px;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0;
+  background-color: rgba(255, 253, 247, 0.78);
+  border: 1px solid rgba(167, 126, 117, 0.45);
+  border-radius: 50%;
+  color: rgba(167, 126, 117, 0.5);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.favorite-button:hover {
+  transform: scale(1.08);
+}
+
+.favorite-button.is-favorite {
+  background-color: rgba(167, 126, 117, 0.95);
+  color: #fffdf7;
+}
+
+.favorite-button:focus-visible {
+  outline: 2px solid #68775b;
+  outline-offset: 3px;
 }
 
 .book-card-content {

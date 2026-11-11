@@ -6,6 +6,7 @@ import BookSearch from "../components/BookSearch";
 const OPEN_LIBRARY_URL = "https://openlibrary.org/search.json";
 const BOOKS_PER_PAGE = 15;
 const MAX_PAGES = 3;
+const FAVORITES_STORAGE_KEY = "book-nook-favorites";
 
 async function searchBooks(query, currentPage, signal) {
   const params = new URLSearchParams({
@@ -35,9 +36,27 @@ function BookNook() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [books, setBooks] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    const storedFavorites = localStorage.getItem(FAVORITES_STORAGE_KEY);
+
+    if (!storedFavorites) {
+      return [];
+    }
+
+    try {
+      const parsedFavorites = JSON.parse(storedFavorites);
+      return Array.isArray(parsedFavorites) ? parsedFavorites : [];
+    } catch {
+      return [];
+    }
+  });
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
     if (!searchTerm) {
@@ -83,9 +102,45 @@ function BookNook() {
     setCurrentPage(page);
   }
 
+  function handleToggleFavorite(book) {
+    setFavorites((currentFavorites) => {
+      const isFavorite = currentFavorites.some(
+        (favorite) => favorite.key === book.key
+      );
+
+      if (isFavorite) {
+        return currentFavorites.filter((favorite) => favorite.key !== book.key);
+      }
+
+      return [...currentFavorites, book];
+    });
+  }
+
+  function isFavorite(book) {
+    return favorites.some((favorite) => favorite.key === book.key);
+  }
+
   return (
     <section className="book-nook-page">
       <h1>Book Nook</h1>
+
+      <section className="favorites-section" aria-labelledby="favorites-heading">
+        <h2 id="favorites-heading">My favorites</h2>
+        {favorites.length > 0 ? (
+          <ul className="book-grid">
+            {favorites.map((book) => (
+              <BookCard
+                key={book.key}
+                book={book}
+                isFavorite={true}
+                onToggleFavorite={handleToggleFavorite}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p className="book-status">You have no favorite books yet.</p>
+        )}
+      </section>
 
       <BookSearch
         value={searchInput}
@@ -106,7 +161,12 @@ function BookNook() {
             <>
               <ul className="book-grid">
                 {books.map((book) => (
-                  <BookCard key={book.key} book={book} />
+                  <BookCard
+                    key={book.key}
+                    book={book}
+                    isFavorite={isFavorite(book)}
+                    onToggleFavorite={handleToggleFavorite}
+                  />
                 ))}
               </ul>
 

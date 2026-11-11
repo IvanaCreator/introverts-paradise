@@ -1,4 +1,4 @@
-function BookCard({ book }) {
+function BookCard({ book, isFavorite, onToggleFavorite }) {
   const author = book.author_name?.join(", ") || "Unknown author";
   const coverUrl = book.cover_i
     ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
@@ -13,6 +13,19 @@ function BookCard({ book }) {
         ) : (
           <span>No cover available</span>
         )}
+        <button
+          className={`favorite-button${isFavorite ? " is-favorite" : ""}`}
+          type="button"
+          onClick={() => onToggleFavorite(book)}
+          aria-label={
+            isFavorite
+              ? `Remove ${book.title} from favorites`
+              : `Add ${book.title} to favorites`
+          }
+          aria-pressed={isFavorite}
+        >
+          ♥
+        </button>
       </div>
 
       <div className="book-card-content">
