@@ -4,7 +4,9 @@
 
 body {
   margin: 0;
-  background-color: #f7f5ed;
+  background:
+    linear-gradient(rgba(247, 245, 237, 0.4), rgba(247, 245, 237, 0.4)),
+    url("/home-background.jpeg") center / cover fixed;
   color: #4d5142;
   font-family: Georgia, serif;
 }
