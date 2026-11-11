@@ -60,9 +60,6 @@ function BookNook() {
 
   useEffect(() => {
     if (!searchTerm) {
-      setBooks([]);
-      setTotalPages(0);
-      setIsLoading(false);
       return;
     }
 
@@ -94,12 +91,22 @@ function BookNook() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const nextSearchTerm = searchInput.trim();
+
     setCurrentPage(1);
-    setSearchTerm(searchInput.trim());
+    setSearchTerm(nextSearchTerm);
+
+    if (!nextSearchTerm) {
+      setBooks([]);
+      setTotalPages(0);
+      setIsLoading(false);
+      setError("");
+    }
   }
 
   function handlePageChange(page) {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function handleToggleFavorite(book) {
@@ -124,10 +131,81 @@ function BookNook() {
     <section className="book-nook-page">
       <h1>Book Nook</h1>
 
+      <BookSearch
+        value={searchInput}
+        onChange={(event) => setSearchInput(event.target.value)}
+        onSubmit={handleSubmit}
+      />
+
+      <div className="book-results">
+        {isLoading && <p className="book-status">Loading books...</p>}
+        {error && <p className="book-status book-error">{error}</p>}
+
+        {!isLoading && !error && (
+          <>
+            {searchTerm && books.length === 0 && (
+              <p className="book-status">No books found.</p>
+            )}
+
+            {books.length > 0 && (
+              <>
+                <ul className="book-grid row g-4 list-unstyled p-0 mt-4 mb-4">
+                  {books.map((book) => (
+                    <BookCard
+                      key={book.key}
+                      book={book}
+                      isFavorite={isFavorite(book)}
+                      onToggleFavorite={handleToggleFavorite}
+                    />
+                  ))}
+                </ul>
+
+                <nav
+                  className="book-pagination pagination justify-content-center gap-2 my-4"
+                  aria-label="Book search pages"
+                >
+                <button
+                  className="btn book-pagination-button"
+                  type="button"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+                  (page) => (
+                    <button
+                      className="btn book-pagination-button"
+                      key={page}
+                      type="button"
+                      onClick={() => handlePageChange(page)}
+                      disabled={currentPage === page}
+                    >
+                      {page}
+                    </button>
+                  )
+                )}
+
+                <button
+                  className="btn book-pagination-button"
+                  type="button"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+                </nav>
+              </>
+            )}
+          </>
+        )}
+      </div>
+
       <section className="favorites-section" aria-labelledby="favorites-heading">
         <h2 id="favorites-heading">My favorites</h2>
         {favorites.length > 0 ? (
-          <ul className="book-grid">
+          <ul className="book-grid row g-4 list-unstyled p-0 mt-4 mb-4">
             {favorites.map((book) => (
               <BookCard
                 key={book.key}
@@ -141,69 +219,6 @@ function BookNook() {
           <p className="book-status">You have no favorite books yet.</p>
         )}
       </section>
-
-      <BookSearch
-        value={searchInput}
-        onChange={(event) => setSearchInput(event.target.value)}
-        onSubmit={handleSubmit}
-      />
-
-      {isLoading && <p className="book-status">Loading books...</p>}
-      {error && <p className="book-status book-error">{error}</p>}
-
-      {!isLoading && !error && (
-        <>
-          {searchTerm && books.length === 0 && (
-            <p className="book-status">No books found.</p>
-          )}
-
-          {books.length > 0 && (
-            <>
-              <ul className="book-grid">
-                {books.map((book) => (
-                  <BookCard
-                    key={book.key}
-                    book={book}
-                    isFavorite={isFavorite(book)}
-                    onToggleFavorite={handleToggleFavorite}
-                  />
-                ))}
-              </ul>
-
-              <nav className="book-pagination" aria-label="Book search pages">
-                <button
-                  type="button"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-
-                {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-                  (page) => (
-                    <button
-                      key={page}
-                      type="button"
-                      onClick={() => handlePageChange(page)}
-                      disabled={currentPage === page}
-                    >
-                      {page}
-                    </button>
-                  )
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-              </nav>
-            </>
-          )}
-        </>
-      )}
     </section>
   );
 }

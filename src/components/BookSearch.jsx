@@ -1,17 +1,19 @@
 function BookSearch({ value, onChange, onSubmit }) {
   return (
-    <form className="book-search-form" onSubmit={onSubmit}>
-      <label htmlFor="book-search">Search by title or author</label>
-      <div className="book-search-controls">
+    <form className="book-search-form mb-4" onSubmit={onSubmit}>
+      <label className="form-label" htmlFor="book-search">
+        Search by title or author
+      </label>
+      <div className="book-search-controls d-flex align-items-center gap-2">
         <input
-          className="book-search-input"
+          className="book-search-input form-control"
           id="book-search"
           type="search"
           value={value}
           onChange={onChange}
           placeholder="e.g. Jane Austen"
         />
-        <button className="book-search-button" type="submit">
+        <button className="book-search-button btn" type="submit">
           Search
         </button>
       </div>

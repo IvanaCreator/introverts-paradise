@@ -24,6 +24,14 @@
   font-weight: bold;
 }
 
+.cozy-navbar .navbar-toggler {
+  border-color: #d9ddcc;
+}
+
+.cozy-navbar .navbar-toggler-icon {
+  filter: sepia(20%) saturate(60%);
+}
+
 /* HOME PAGE */
 
 .home-page {
@@ -160,14 +168,10 @@
 }
 
 .book-search-form {
-  display: block;
   max-width: 720px;
-  margin-bottom: 28px;
 }
 
 .book-search-form label {
-  display: block;
-  margin-bottom: 8px;
   color: #6f675e;
   font-size: 15px;
   font-weight: bold;
@@ -175,18 +179,12 @@
 }
 
 .book-search-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  max-width: 720px;
 }
 
 .book-search-input {
-  display: block;
-  width: 100%;
-  padding: 11px 14px;
   background-color: rgba(255, 253, 247, 0.9);
   border: 1px solid #d9ddcc;
-  border-radius: 10px;
   color: #4d5142;
   font: inherit;
 }
@@ -197,7 +195,7 @@
 }
 
 .book-search-button,
-.book-pagination button {
+.book-pagination-button {
   padding: 11px 18px;
   background-color: #68775b;
   border: 1px solid #68775b;
@@ -211,13 +209,13 @@
 }
 
 .book-search-button:hover,
-.book-pagination button:hover:not(:disabled) {
+.book-pagination-button:hover:not(:disabled) {
   background-color: #59694f;
   border-color: #59694f;
 }
 
 .book-search-button:focus-visible,
-.book-pagination button:focus-visible,
+.book-pagination-button:focus-visible,
 .book-details-link:focus-visible {
   outline: 2px solid #a77e75;
   outline-offset: 3px;
@@ -235,12 +233,7 @@
 }
 
 .book-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
   list-style: none;
-  padding: 0;
-  margin: 36px 0;
 }
 
 .book-card {
@@ -351,14 +344,7 @@
   text-decoration: underline;
 }
 
-.book-pagination {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 32px 0;
-}
-
-.book-pagination button:disabled {
+.book-pagination-button:disabled {
   background-color: #d9ddcc;
   border-color: #d9ddcc;
   color: #777568;
@@ -388,7 +374,7 @@
   }
 
   .book-search-form {
-    display: block;
+    max-width: 100%;
   }
 
   .book-search-controls {

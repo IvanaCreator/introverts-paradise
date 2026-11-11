@@ -6,7 +6,7 @@ function BookCard({ book, isFavorite, onToggleFavorite }) {
   const bookUrl = `https://openlibrary.org${book.key}`;
 
   return (
-    <li className="book-card">
+    <li className="book-card col-12 col-md-6 col-lg-4">
       <div className="book-cover">
         {coverUrl ? (
           <img src={coverUrl} alt={`Cover of ${book.title}`} />
