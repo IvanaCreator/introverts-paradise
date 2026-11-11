@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const JOURNAL_STORAGE_KEY = "introverts-paradise-journal";
 const BUCKET_LIST_STORAGE_KEY = "introverts-paradise-bucket-list";
-const MOODS = ["happy", "calm", "tired", "excited", "sad", "stressed", "thoughtful", "normal"];
+const MOODS = ["happy", "calm", "tired", "excited", "sad", "stressed", "thoughtful", "hungry", "normal"];
 
 function getToday() {
   return new Date().toISOString().slice(0, 10);
@@ -114,91 +114,103 @@ function Journal() {
     <section className="journal-page container">
       <h1 className="mb-4">My Journal</h1>
 
-      <form className="journal-form mb-5" onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="journal-entry">
-            Your entry
-          </label>
-          <textarea
-            className="form-control"
-            id="journal-entry"
-            value={entryText}
-            onChange={(event) => setEntryText(event.target.value)}
-            placeholder="Write a little about your day..."
-            required
-          />
+      <div className="journal-feature-row journal-writing-row">
+        <div className="journal-image-frame">
+          <img src="/open-journal.jpeg" alt="An open journal ready for writing" />
         </div>
 
-        <div className="mb-3">
-          <label className="form-label" htmlFor="journal-mood">
-            Mood
-          </label>
-          <select
-            className="form-select"
-            id="journal-mood"
-            value={mood}
-            onChange={(event) => setMood(event.target.value)}
-          >
-            {MOODS.map((moodOption) => (
-              <option key={moodOption} value={moodOption}>
-                {moodOption}
-              </option>
-            ))}
-          </select>
+        <form className="journal-form mb-5" onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="journal-entry">
+              Your entry
+            </label>
+            <textarea
+              className="form-control"
+              id="journal-entry"
+              value={entryText}
+              onChange={(event) => setEntryText(event.target.value)}
+              placeholder="Write a little about your day..."
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label" htmlFor="journal-mood">
+              Mood
+            </label>
+            <select
+              className="form-select"
+              id="journal-mood"
+              value={mood}
+              onChange={(event) => setMood(event.target.value)}
+            >
+              {MOODS.map((moodOption) => (
+                <option key={moodOption} value={moodOption}>
+                  {moodOption}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label" htmlFor="journal-date">
+              Date
+            </label>
+            <input
+              className="form-control"
+              id="journal-date"
+              type="date"
+              value={entryDate}
+              onChange={(event) => setEntryDate(event.target.value)}
+              required
+            />
+          </div>
+
+          <button className="btn btn-success" type="submit">
+            Save entry
+          </button>
+        </form>
+      </div>
+
+      <div className="journal-feature-row journal-history-row">
+        <section
+          className="journal-history mb-5"
+          aria-labelledby="journal-history-heading"
+        >
+          <h2 className="mb-3" id="journal-history-heading">
+            Journal history
+          </h2>
+
+          {entries.length === 0 ? (
+            <p className="journal-empty">No journal entries yet.</p>
+          ) : (
+            <ul className="journal-entry-list list-group">
+              {entries.map((entry) => (
+                <li className="list-group-item" key={entry.id}>
+                  <p>{entry.text}</p>
+                  <p>
+                    <strong>Mood:</strong> {entry.mood}
+                  </p>
+                  <p>
+                    <strong>Date:</strong> {entry.date}
+                  </p>
+                  <button
+                    className="btn btn-outline-danger"
+                    type="button"
+                    onClick={() => handleDelete(entry.id)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <div className="journal-image-frame">
+          <img src="/closed-journal.jpeg" alt="A closed journal" />
         </div>
-
-        <div className="mb-3">
-          <label className="form-label" htmlFor="journal-date">
-            Date
-          </label>
-          <input
-            className="form-control"
-            id="journal-date"
-            type="date"
-            value={entryDate}
-            onChange={(event) => setEntryDate(event.target.value)}
-            required
-          />
-        </div>
-
-        <button className="btn btn-success" type="submit">
-          Save entry
-        </button>
-      </form>
-
-      <section
-        className="journal-history mb-5"
-        aria-labelledby="journal-history-heading"
-      >
-        <h2 className="mb-3" id="journal-history-heading">
-          Journal history
-        </h2>
-
-        {entries.length === 0 ? (
-          <p className="journal-empty">No journal entries yet.</p>
-        ) : (
-          <ul className="journal-entry-list list-group">
-            {entries.map((entry) => (
-              <li className="list-group-item" key={entry.id}>
-                <p>{entry.text}</p>
-                <p>
-                  <strong>Mood:</strong> {entry.mood}
-                </p>
-                <p>
-                  <strong>Date:</strong> {entry.date}
-                </p>
-                <button
-                  className="btn btn-outline-danger"
-                  type="button"
-                  onClick={() => handleDelete(entry.id)}
-                >
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      </div>
 
       <section className="bucket-list-section" aria-labelledby="bucket-list-heading">
         <h2 className="mb-2" id="bucket-list-heading">
