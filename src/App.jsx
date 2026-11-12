@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
@@ -22,7 +22,7 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode((current) => !current)}
@@ -37,7 +37,7 @@ function App() {
           <Route path="/puzzle" element={<PuzzleRoom />} />
         </Routes>
       </main>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
