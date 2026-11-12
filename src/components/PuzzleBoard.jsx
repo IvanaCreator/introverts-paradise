@@ -34,14 +34,43 @@ function PuzzleBoard({ puzzle }) {
   const [pieces, setPieces] = useState(() =>
     createShuffledPieces(difficulty.size),
   );
+  const [selectedPieceIndex, setSelectedPieceIndex] = useState(null);
+  const [moves, setMoves] = useState(0);
 
   const shufflePieces = () => {
     setPieces(createShuffledPieces(difficulty.size));
+    setSelectedPieceIndex(null);
+    setMoves(0);
   };
 
   const selectDifficulty = (option) => {
     setSelectedDifficulty(option.id);
     setPieces(createShuffledPieces(option.size));
+    setSelectedPieceIndex(null);
+    setMoves(0);
+  };
+
+  const handlePieceClick = (pieceIndex) => {
+    if (selectedPieceIndex === null) {
+      setSelectedPieceIndex(pieceIndex);
+      return;
+    }
+
+    if (selectedPieceIndex === pieceIndex) {
+      setSelectedPieceIndex(null);
+      return;
+    }
+
+    setPieces((currentPieces) => {
+      const nextPieces = [...currentPieces];
+      [nextPieces[selectedPieceIndex], nextPieces[pieceIndex]] = [
+        nextPieces[pieceIndex],
+        nextPieces[selectedPieceIndex],
+      ];
+      return nextPieces;
+    });
+    setMoves((currentMoves) => currentMoves + 1);
+    setSelectedPieceIndex(null);
   };
 
   return (
@@ -84,17 +113,21 @@ function PuzzleBoard({ puzzle }) {
         style={{ "--puzzle-size": difficulty.size }}
         aria-label={`${puzzle.title} puzzle board`}
       >
-        {pieces.map((piece) => {
+        {pieces.map((piece, pieceIndex) => {
           const position = difficulty.size - 1;
           const backgroundPosition = `${(piece.column / position) * 100}% ${
             (piece.row / position) * 100
           }%`;
 
           return (
-            <div
-              className="puzzle-piece"
+            <button
+              className={`puzzle-piece ${
+                selectedPieceIndex === pieceIndex ? "puzzle-piece-selected" : ""
+              }`}
               key={piece.id}
-              role="img"
+              type="button"
+              onClick={() => handlePieceClick(pieceIndex)}
+              aria-pressed={selectedPieceIndex === pieceIndex}
               aria-label={`Puzzle piece ${piece.id + 1}`}
               style={{
                 backgroundImage: `url(${puzzle.image})`,
@@ -107,9 +140,9 @@ function PuzzleBoard({ puzzle }) {
           );
         })}
       </div>
-      <p className="mt-3 text-muted">
-        The {difficulty.size} × {difficulty.size} pieces are shuffled and ready
-        to solve.
+      <p className="mt-3 text-muted">Moves: {moves}</p>
+      <p className="text-muted">
+        Select two pieces to swap their positions.
       </p>
     </div>
   );
