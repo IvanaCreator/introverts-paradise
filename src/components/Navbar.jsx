@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ isDarkMode, onToggleTheme }) {
   return (
     <nav className="navbar navbar-expand-lg cozy-navbar">
       <div className="container">
@@ -41,6 +41,18 @@ function Navbar() {
             <NavLink className="nav-link" to="/puzzle">
               Puzzle Room
             </NavLink>
+
+            <button
+              className="theme-toggle"
+              type="button"
+              onClick={onToggleTheme}
+              aria-pressed={isDarkMode}
+              aria-label={
+                isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+              }
+            >
+              {isDarkMode ? "☀️" : "🌙"}
+            </button>
           </div>
         </div>
       </div>

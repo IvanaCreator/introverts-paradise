@@ -10,6 +10,7 @@ import './styles/books.css';
 import './styles/journal.css';
 import './styles/garden.css';
 import './styles/puzzle.css';
+import './styles/theme.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

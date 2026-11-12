@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
 
@@ -9,9 +10,23 @@ import FlowerGarden from "./pages/FlowerGarden";
 import PuzzleRoom from "./pages/PuzzleRoom";
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => localStorage.getItem("theme") === "dark",
+  );
+
+  useEffect(() => {
+    const theme = isDarkMode ? "dark" : "light";
+
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [isDarkMode]);
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar
+        isDarkMode={isDarkMode}
+        onToggleTheme={() => setIsDarkMode((current) => !current)}
+      />
 
       <main className="container py-5">
         <Routes>

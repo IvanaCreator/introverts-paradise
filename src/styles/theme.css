@@ -1,0 +1,300 @@
+:root {
+  --page-overlay: rgb(247 245 237 / 40%);
+  --page-background: #f7f5ed;
+  --text-color: #4d5142;
+  --muted-color: #777568;
+  --heading-color: #68775b;
+  --surface-color: rgb(255 253 247 / 90%);
+  --surface-soft: rgb(232 234 220 / 78%);
+  --surface-pink: rgb(240 230 223 / 72%);
+  --border-color: #d9ddcc;
+  --border-soft: #e4dfd1;
+  --accent-color: #a77e75;
+  --accent-dark: #59694f;
+  --light-text: #fffdf7;
+}
+
+[data-theme="dark"] {
+  --page-overlay: rgb(30 34 31 / 78%);
+  --page-background: #1e221f;
+  --text-color: #e8e4da;
+  --muted-color: #c0bbae;
+  --heading-color: #c9d8b7;
+  --surface-color: rgb(48 55 48 / 94%);
+  --surface-soft: rgb(57 67 56 / 94%);
+  --surface-pink: rgb(67 55 57 / 94%);
+  --border-color: #5c6a58;
+  --border-soft: #596257;
+  --accent-color: #d1a29a;
+  --accent-dark: #9faf8c;
+  --light-text: #fffaf0;
+}
+
+body {
+  background-color: var(--page-background);
+  color: var(--text-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.cozy-navbar {
+  background-color: var(--surface-soft);
+  border-bottom-color: var(--border-color);
+}
+
+.cozy-navbar .navbar-brand,
+.cozy-navbar .nav-link {
+  color: var(--heading-color);
+}
+
+.cozy-navbar .nav-link:hover,
+.cozy-navbar .nav-link.active {
+  color: var(--accent-color);
+}
+
+.cozy-navbar .navbar-toggler {
+  border-color: var(--border-color);
+}
+
+.theme-toggle {
+  align-self: center;
+  margin-left: 16px;
+  padding: 5px 9px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  font-size: 15px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-color);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+[data-theme="dark"] .book-card,
+[data-theme="dark"] .journal-entry-list .list-group-item,
+[data-theme="dark"] .bucket-list-section .card {
+  background-color: var(--surface-color);
+  border-color: var(--border-soft);
+}
+
+[data-theme="dark"] .home-page h1,
+[data-theme="dark"] .home-page h2,
+[data-theme="dark"] .book-nook-page h1,
+[data-theme="dark"] .book-search-section h2,
+[data-theme="dark"] .favorites-section h2,
+[data-theme="dark"] .book-card h2,
+[data-theme="dark"] .journal-page h1,
+[data-theme="dark"] .journal-page h2,
+[data-theme="dark"] .flower-garden-page h1,
+[data-theme="dark"] .flower-garden-page h2,
+[data-theme="dark"] .puzzle-room-page h1,
+[data-theme="dark"] .puzzle-room-section-title,
+[data-theme="dark"] .puzzle-board-section h2 {
+  color: var(--heading-color);
+}
+
+[data-theme="dark"] .welcome-text,
+[data-theme="dark"] .book-nook-intro,
+[data-theme="dark"] .book-search-section > p,
+[data-theme="dark"] .favorites-intro,
+[data-theme="dark"] .book-status,
+[data-theme="dark"] .book-results-count,
+[data-theme="dark"] .book-author,
+[data-theme="dark"] .book-details,
+[data-theme="dark"] .journal-intro,
+[data-theme="dark"] .journal-calendar-section > p,
+[data-theme="dark"] .journal-section-intro,
+[data-theme="dark"] .bucket-list-section > p,
+[data-theme="dark"] .journal-empty,
+[data-theme="dark"] .puzzle-room-intro,
+[data-theme="dark"] .puzzle-selected-image,
+[data-theme="dark"] .puzzle-stats,
+[data-theme="dark"] .puzzle-selection-status {
+  color: var(--muted-color);
+}
+
+[data-theme="dark"] .quote-card,
+[data-theme="dark"] .inspiration-card,
+[data-theme="dark"] .flower-garden-page section,
+[data-theme="dark"] .puzzle-carousel-button {
+  background-color: var(--surface-color);
+  border-color: var(--border-soft);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .quote-card h2,
+[data-theme="dark"] .inspiration-card h2 {
+  color: var(--heading-color);
+}
+
+[data-theme="dark"] .quote-card blockquote {
+  color: #e2c7bd;
+}
+
+[data-theme="dark"] .quote-author {
+  color: #b6c4a4;
+}
+
+[data-theme="dark"] .inspiration-card h2 {
+  color: #d7b6ac;
+}
+
+[data-theme="dark"] .inspiration-card p:last-child {
+  color: #e1d6be;
+}
+
+[data-theme="dark"] .inspiration-card .section-label {
+  color: #b7c99f;
+}
+
+[data-theme="dark"] .flower-choice,
+[data-theme="dark"] .vase-choice {
+  background-color: var(--surface-color);
+  border-color: var(--border-color);
+  color: var(--heading-color);
+}
+
+[data-theme="dark"] .flower-choice:hover,
+[data-theme="dark"] .vase-choice:hover,
+[data-theme="dark"] .vase-choice.is-selected {
+  border-color: var(--accent-color);
+  background-color: var(--surface-soft);
+}
+
+[data-theme="dark"] .flower-garden-page section {
+  background-color: var(--surface-soft);
+  border-color: var(--border-color);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 18%);
+}
+
+[data-theme="dark"] .flower-garden-page > p {
+  color: #c4c0b5;
+}
+
+[data-theme="dark"] .flower-garden-page section > p {
+  color: var(--muted-color);
+}
+
+[data-theme="dark"] .flower-garden-page > section > .btn-outline-secondary {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+[data-theme="dark"] .flower-garden-page > section > .btn-outline-secondary:hover {
+  background-color: var(--accent-color);
+  color: #2b2926;
+}
+
+[data-theme="dark"] .book-search-input,
+[data-theme="dark"] .journal-page .form-control,
+[data-theme="dark"] .journal-page .form-select {
+  background-color: var(--surface-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .book-search-input::placeholder,
+[data-theme="dark"] .journal-page .form-control::placeholder {
+  color: var(--muted-color);
+}
+
+[data-theme="dark"] .book-favorite-message,
+[data-theme="dark"] .journal-form,
+[data-theme="dark"] .bucket-list-section,
+[data-theme="dark"] .journal-calendar-section,
+[data-theme="dark"] .puzzle-room-panel,
+[data-theme="dark"] .puzzle-board-section {
+  background-color: var(--surface-soft);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .journal-history {
+  background-color: var(--surface-pink);
+  border-color: var(--border-soft);
+}
+
+[data-theme="dark"] .book-cover,
+[data-theme="dark"] .bouquet-stage {
+  background-color: var(--surface-soft);
+  border-color: var(--border-color);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 18%);
+}
+
+[data-theme="dark"] .mood-chart-section {
+  background-color: var(--surface-soft);
+  border-color: var(--border-color);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 18%);
+}
+
+[data-theme="dark"] .mood-chart-section > p {
+  color: var(--muted-color);
+}
+
+[data-theme="dark"] .journal-page .form-label,
+[data-theme="dark"] .journal-entry-list p:first-child,
+[data-theme="dark"] .bucket-list-section .card-text {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .book-details-link,
+[data-theme="dark"] .journal-calendar-clear,
+[data-theme="dark"] .puzzle-room-label {
+  color: var(--accent-color);
+}
+
+[data-theme="dark"] .puzzle-selection-status.text-muted {
+  color: #e1d6be !important;
+}
+
+[data-theme="dark"] .puzzle-new-game-button {
+  background-color: #b78379;
+  border-color: #b78379;
+  color: #241f1e;
+}
+
+[data-theme="dark"] .puzzle-new-game-button:hover {
+  background-color: #d19b8f;
+  border-color: #d19b8f;
+  color: #241f1e;
+}
+
+[data-theme="dark"] .journal-calendar-section .react-calendar {
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .journal-calendar-section .react-calendar button {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .journal-calendar-section .react-calendar__navigation button:hover,
+[data-theme="dark"] .journal-calendar-section .react-calendar__tile:hover {
+  background: var(--surface-soft);
+}
+
+[data-theme="dark"] .recharts-default-tooltip {
+  background-color: var(--surface-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .recharts-tooltip-item,
+[data-theme="dark"] .recharts-tooltip-label {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .recharts-text {
+  fill: var(--text-color);
+}
+
+@media (max-width: 991.98px) {
+  .theme-toggle {
+    margin: 10px 0 4px;
+  }
+}
