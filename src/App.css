@@ -919,14 +919,28 @@
   color: #68775b;
 }
 
-.puzzle-board-section > .btn {
+.puzzle-new-game-button {
   border-color: #a77e75;
-  color: #a77e75;
-}
-
-.puzzle-board-section > .btn:hover {
   background-color: #a77e75;
   color: #fffdf7;
+}
+
+.puzzle-new-game-button:hover {
+  border-color: #8d665f;
+  background-color: #8d665f;
+  color: #fffdf7;
+}
+
+.puzzle-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  color: #68775b;
+  font-weight: bold;
+}
+
+.puzzle-selection-status {
+  min-height: 24px;
 }
 
 .puzzle-moves {
@@ -950,13 +964,22 @@
   box-shadow: inset 0 0 0 4px #f4e3bf;
 }
 
+.puzzle-piece:focus-visible,
+.puzzle-carousel-button:focus-visible,
+.puzzle-carousel-arrow:focus-visible,
+.puzzle-new-game-button:focus-visible {
+  outline: 3px solid #a77e75;
+  outline-offset: 3px;
+}
+
 .puzzle-complete {
   margin-inline: auto;
   width: min(100%, 560px);
   padding: 1rem;
-  border: 2px solid #6f5744;
+  border: 2px solid #a77e75;
   border-radius: 0.5rem;
-  background-color: rgb(244 227 191 / 75%);
+  background-color: rgb(240 230 223 / 82%);
+  color: #6f675e;
 }
 
 .puzzle-carousel {
@@ -1055,6 +1078,10 @@
 
   .puzzle-carousel {
     gap: 0.35rem;
+  }
+
+  .puzzle-carousel-card {
+    flex-basis: 50%;
   }
 
   .puzzle-carousel-arrow {

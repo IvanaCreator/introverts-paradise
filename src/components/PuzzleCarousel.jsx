@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function PuzzleCarousel({ puzzles, selectedPuzzleId, onSelect }) {
   const [startIndex, setStartIndex] = useState(0);
-  const visiblePuzzles = 4;
+  const [visiblePuzzles, setVisiblePuzzles] = useState(() =>
+    window.innerWidth < 768 ? 2 : 4,
+  );
   const lastStartIndex = Math.max(0, puzzles.length - visiblePuzzles);
-  const canGoBack = startIndex > 0;
-  const canGoForward = startIndex < lastStartIndex;
+  const currentStartIndex = Math.min(startIndex, lastStartIndex);
+  const canGoBack = currentStartIndex > 0;
+  const canGoForward = currentStartIndex < lastStartIndex;
+
+  useEffect(() => {
+    const updateVisiblePuzzles = () => {
+      setVisiblePuzzles(window.innerWidth < 768 ? 2 : 4);
+    };
+
+    window.addEventListener("resize", updateVisiblePuzzles);
+    return () => window.removeEventListener("resize", updateVisiblePuzzles);
+  }, []);
 
   const moveCarousel = (direction) => {
     setStartIndex((currentIndex) =>
@@ -17,7 +29,10 @@ function PuzzleCarousel({ puzzles, selectedPuzzleId, onSelect }) {
   };
 
   return (
-    <div className="puzzle-carousel mt-4">
+    <div
+      className="puzzle-carousel mt-4"
+      aria-label="Puzzle image selection"
+    >
       <button
         className="puzzle-carousel-arrow"
         type="button"
@@ -33,7 +48,7 @@ function PuzzleCarousel({ puzzles, selectedPuzzleId, onSelect }) {
           className="puzzle-carousel-track"
           style={{
             transform: `translateX(-${
-              startIndex * (100 / puzzles.length)
+              currentStartIndex * (100 / puzzles.length)
             }%)`,
           }}
         >
