@@ -9,6 +9,7 @@ function VasePicker({ vases, selectedVaseId, onSelect }) {
             }`}
             type="button"
             onClick={() => onSelect(vase.id)}
+            aria-pressed={selectedVaseId === vase.id}
           >
             <img
               src={vase.image}
