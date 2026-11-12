@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-
+import DailyInspiration from "../components/DailyInspiration";
+import HomeHero from "../components/HomeHero";
+import QuoteCard from "../components/QuoteCard";
 import quotes from "../data/quotes";
 import inspirations from "../data/inspirations";
 
@@ -15,47 +16,9 @@ function Home() {
 
   return (
     <div className="home-page">
-      <section className="welcome-section">
-        <div className="welcome-content">
-          <p className="welcome-label">A LITTLE PLACE JUST FOR YOU</p>
-
-          <h1>Welcome to Your Cozy Corner</h1>
-
-          <p className="welcome-text">
-            A peaceful little space to slow down, dream, create and enjoy the
-            little things in life.
-          </p>
-        </div>
-
-        <div className="welcome-image-frame">
-          <img
-            src="/welcome.jpeg"
-            alt="A warm and cozy home interior"
-          />
-        </div>
-      </section>
-
-      <section className="quote-card">
-        <p className="section-label">A LITTLE REMINDER</p>
-
-        <h2>Today's Quote</h2>
-
-        <blockquote>
-          "{quote.text}"
-        </blockquote>
-
-        <p className="quote-author">
-          — {quote.author}
-        </p>
-      </section>
-
-      <section className="inspiration-card text-center">
-        <p className="section-label">YOUR DAILY INSPIRATION</p>
-
-        <h2>Something lovely to do today</h2>
-
-        <p>{inspiration}</p>
-      </section>
+      <HomeHero />
+      <QuoteCard quote={quote} />
+      <DailyInspiration inspiration={inspiration} />
     </div>
   );
 }
