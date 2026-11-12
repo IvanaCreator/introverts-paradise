@@ -826,3 +826,22 @@
   }
 
 }
+.puzzle-board {
+  display: grid;
+  grid-template-columns: repeat(var(--puzzle-size), 1fr);
+  gap: 2px;
+  width: min(100%, 560px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 3px solid #6f5744;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgb(70 48 32 / 15%);
+  background-color: #6f5744;
+}
+
+.puzzle-piece {
+  min-width: 0;
+  aspect-ratio: 1;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}

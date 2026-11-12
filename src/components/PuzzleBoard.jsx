@@ -13,6 +13,14 @@ function PuzzleBoard({ puzzle }) {
   const difficulty = difficulties.find(
     (option) => option.id === selectedDifficulty,
   );
+  const pieces = Array.from(
+    { length: difficulty.size * difficulty.size },
+    (_, index) => ({
+      id: index,
+      row: Math.floor(index / difficulty.size),
+      column: index % difficulty.size,
+    }),
+  );
 
   return (
     <div className="mt-5">
@@ -42,14 +50,37 @@ function PuzzleBoard({ puzzle }) {
       <p>
         Selected image: <strong>{puzzle.title}</strong>
       </p>
-      <img
-        className="img-fluid rounded shadow-sm"
-        src={puzzle.image}
-        alt={puzzle.title}
-        style={{ maxHeight: "360px" }}
-      />
+      <div
+        className="puzzle-board mx-auto"
+        style={{ "--puzzle-size": difficulty.size }}
+        aria-label={`${puzzle.title} puzzle board`}
+      >
+        {pieces.map((piece) => {
+          const position = difficulty.size - 1;
+          const backgroundPosition = `${(piece.column / position) * 100}% ${
+            (piece.row / position) * 100
+          }%`;
+
+          return (
+            <div
+              className="puzzle-piece"
+              key={piece.id}
+              role="img"
+              aria-label={`Puzzle piece ${piece.id + 1}`}
+              style={{
+                backgroundImage: `url(${puzzle.image})`,
+                backgroundPosition,
+                backgroundSize: `${difficulty.size * 100}% ${
+                  difficulty.size * 100
+                }%`,
+              }}
+            />
+          );
+        })}
+      </div>
       <p className="mt-3 text-muted">
-        The puzzle will have {difficulty.size} × {difficulty.size} pieces.
+        The {difficulty.size} × {difficulty.size} pieces are currently in their
+        original order.
       </p>
     </div>
   );
