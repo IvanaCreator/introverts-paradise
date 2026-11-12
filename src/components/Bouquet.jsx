@@ -1,3 +1,5 @@
+const FLOWER_SLOT_ORDER = [1, 2, 0, 3];
+
 function Bouquet({ flowers, vase }) {
   const flowerAreaStyle = {
     "--flower-area-top": vase.flowerArea.top,
@@ -36,7 +38,8 @@ function Bouquet({ flowers, vase }) {
               src={flower.image}
               alt={flower.name}
               style={{
-                "--flower-slot": index % vase.maxFlowers,
+                "--flower-slot":
+                  FLOWER_SLOT_ORDER[index % vase.maxFlowers],
                 "--flower-slots": vase.maxFlowers,
                 "--flower-vertical-offset": flower.verticalOffset || "0px",
                 "--flower-horizontal-offset": flower.horizontalOffset || "0px",

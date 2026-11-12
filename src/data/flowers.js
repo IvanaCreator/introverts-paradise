@@ -54,7 +54,7 @@ export const vases = [
     vaseScale: 1,
     flowerBoundary: "53%",
     flowerOrigin: { top: "60%", left: "50%" },
-    flowerAngle: 12,
-    maxFlowers: 4,
+    flowerAngle: 20,
+    maxFlowers: 3,
   },
 ];
