@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
-import BucketListForm from "../components/BucketListForm";
-import BucketListItem from "../components/BucketListItem";
-import JournalEntryCard from "../components/JournalEntryCard";
+import BucketListSection from "../components/BucketListSection";
 import JournalEntryForm from "../components/JournalEntryForm";
 import JournalCalendar from "../components/JournalCalendar";
+import JournalHistory from "../components/JournalHistory";
 import MoodChart from "../components/MoodChart";
 
 const JOURNAL_STORAGE_KEY = "introverts-paradise-journal";
@@ -87,10 +86,6 @@ function Journal() {
     );
   }
 
-  const visibleEntries = selectedDate
-    ? entries.filter((entry) => entry.date === selectedDate)
-    : entries;
-
   function handleTaskSubmit(event) {
     event.preventDefault();
     const text = taskText.trim();
@@ -161,37 +156,11 @@ function Journal() {
       />
 
       <div className="journal-feature-row journal-history-row">
-        <section
-          className="journal-history mb-5"
-          aria-labelledby="journal-history-heading"
-        >
-          <h2 className="mb-3" id="journal-history-heading">
-            Journal history
-          </h2>
-          <p className="journal-section-intro">
-            {selectedDate
-              ? `Entries from ${selectedDate}.`
-              : "Look back on the days you've captured and see how far you've come."}
-          </p>
-
-          {visibleEntries.length === 0 ? (
-            <p className="journal-empty">
-              {selectedDate
-                ? "No journal entries for this day."
-                : "No journal entries yet."}
-            </p>
-          ) : (
-            <ul className="journal-entry-list list-group">
-              {visibleEntries.map((entry) => (
-                <JournalEntryCard
-                  key={entry.id}
-                  entry={entry}
-                  onDelete={handleDelete}
-                />
-              ))}
-            </ul>
-          )}
-        </section>
+        <JournalHistory
+          entries={entries}
+          selectedDate={selectedDate}
+          onDelete={handleDelete}
+        />
 
         <div className="journal-image-frame">
           <img src="/closed-journal.jpeg" alt="A closed journal" />
@@ -200,36 +169,14 @@ function Journal() {
 
       <MoodChart entries={entries} />
 
-      <section
-        className="bucket-list-section"
-        aria-labelledby="bucket-list-heading"
-      >
-        <h2 className="mb-2" id="bucket-list-heading">
-          My Bucket List
-        </h2>
-        <p>Things I would like to try someday.</p>
-
-        <BucketListForm
-          taskText={taskText}
-          onTaskChange={(event) => setTaskText(event.target.value)}
-          onSubmit={handleTaskSubmit}
-        />
-
-        {tasks.length === 0 ? (
-          <p className="journal-empty">Your bucket list is empty.</p>
-        ) : (
-          <div className="row g-3">
-            {tasks.map((task) => (
-              <BucketListItem
-                key={task.id}
-                task={task}
-                onToggle={handleTaskToggle}
-                onDelete={handleTaskDelete}
-              />
-            ))}
-          </div>
-        )}
-      </section>
+      <BucketListSection
+        taskText={taskText}
+        tasks={tasks}
+        onTaskChange={(event) => setTaskText(event.target.value)}
+        onSubmit={handleTaskSubmit}
+        onToggle={handleTaskToggle}
+        onDelete={handleTaskDelete}
+      />
     </section>
   );
 }
