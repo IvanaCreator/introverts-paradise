@@ -4,6 +4,7 @@ import BucketListForm from "../components/BucketListForm";
 import BucketListItem from "../components/BucketListItem";
 import JournalEntryCard from "../components/JournalEntryCard";
 import JournalEntryForm from "../components/JournalEntryForm";
+import MoodChart from "../components/MoodChart";
 
 const JOURNAL_STORAGE_KEY = "introverts-paradise-journal";
 const BUCKET_LIST_STORAGE_KEY = "introverts-paradise-bucket-list";
@@ -177,6 +178,8 @@ function Journal() {
           <img src="/closed-journal.jpeg" alt="A closed journal" />
         </div>
       </div>
+
+      <MoodChart entries={entries} />
 
       <section
         className="bucket-list-section"
