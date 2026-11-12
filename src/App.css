@@ -614,6 +614,7 @@
 }
 
 .bouquet-debug-points {
+  display: none;
   position: absolute;
   z-index: 3;
   top: var(--flower-area-top);
@@ -658,6 +659,7 @@
 }
 
 .bouquet-boundary-debug {
+  display: none;
   position: absolute;
   z-index: 4;
   top: var(--flower-boundary);
@@ -690,6 +692,7 @@
 }
 
 .bouquet-origin-debug {
+  display: none;
   position: absolute;
   z-index: 5;
   top: var(--flower-origin-top);
