@@ -4,6 +4,7 @@ import BucketListForm from "../components/BucketListForm";
 import BucketListItem from "../components/BucketListItem";
 import JournalEntryCard from "../components/JournalEntryCard";
 import JournalEntryForm from "../components/JournalEntryForm";
+import JournalCalendar from "../components/JournalCalendar";
 import MoodChart from "../components/MoodChart";
 
 const JOURNAL_STORAGE_KEY = "introverts-paradise-journal";
@@ -46,6 +47,7 @@ function Journal() {
   const [entries, setEntries] = useState(() =>
     readStoredList(JOURNAL_STORAGE_KEY)
   );
+  const [selectedDate, setSelectedDate] = useState(null);
   const [taskText, setTaskText] = useState("");
   const [tasks, setTasks] = useState(() =>
     readStoredList(BUCKET_LIST_STORAGE_KEY)
@@ -84,6 +86,10 @@ function Journal() {
       currentEntries.filter((entry) => entry.id !== entryId)
     );
   }
+
+  const visibleEntries = selectedDate
+    ? entries.filter((entry) => entry.date === selectedDate)
+    : entries;
 
   function handleTaskSubmit(event) {
     event.preventDefault();
@@ -147,6 +153,13 @@ function Journal() {
         />
       </div>
 
+      <JournalCalendar
+        entries={entries}
+        selectedDate={selectedDate}
+        onDateSelect={setSelectedDate}
+        onClear={() => setSelectedDate(null)}
+      />
+
       <div className="journal-feature-row journal-history-row">
         <section
           className="journal-history mb-5"
@@ -156,14 +169,20 @@ function Journal() {
             Journal history
           </h2>
           <p className="journal-section-intro">
-            Look back on the days you've captured and see how far you've come.
+            {selectedDate
+              ? `Entries from ${selectedDate}.`
+              : "Look back on the days you've captured and see how far you've come."}
           </p>
 
-          {entries.length === 0 ? (
-            <p className="journal-empty">No journal entries yet.</p>
+          {visibleEntries.length === 0 ? (
+            <p className="journal-empty">
+              {selectedDate
+                ? "No journal entries for this day."
+                : "No journal entries yet."}
+            </p>
           ) : (
             <ul className="journal-entry-list list-group">
-              {entries.map((entry) => (
+              {visibleEntries.map((entry) => (
                 <JournalEntryCard
                   key={entry.id}
                   entry={entry}

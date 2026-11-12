@@ -485,6 +485,79 @@
   border-radius: 22px;
 }
 
+.journal-calendar-section {
+  padding: clamp(24px, 4vw, 36px);
+  background-color: rgba(232, 234, 220, 0.72);
+  border: 1px solid #d9ddcc;
+  border-radius: 22px;
+}
+
+.journal-calendar-section h2 {
+  margin-bottom: 8px;
+}
+
+.journal-calendar-section > p {
+  margin-bottom: 22px;
+  color: #8d8576;
+  line-height: 1.7;
+}
+
+.journal-calendar-section .react-calendar {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: rgba(255, 253, 247, 0.9);
+  color: #6f675e;
+  font-family: inherit;
+}
+
+.journal-calendar-section .react-calendar button {
+  color: inherit;
+  font-family: inherit;
+}
+
+.journal-calendar-section .react-calendar__tile--now {
+  background: rgba(167, 126, 117, 0.16);
+}
+
+.journal-calendar-section .react-calendar__tile--active {
+  background: #a77e75;
+  color: #fffdf7;
+}
+
+.journal-calendar-section .react-calendar__tile:hover,
+.journal-calendar-section .react-calendar__navigation button:hover {
+  background: #e8eadc;
+}
+
+.journal-calendar-has-entry {
+  position: relative;
+  font-weight: bold;
+}
+
+.journal-calendar-has-entry::after {
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #68775b;
+  content: "";
+}
+
+.journal-calendar-clear {
+  margin-top: 18px;
+  border-color: #a18b78;
+  color: #6f675e;
+}
+
+.journal-calendar-clear:hover {
+  border-color: #68775b;
+  background-color: #68775b;
+  color: #fffdf7;
+}
+
 .journal-section-intro {
   margin: -4px 0 22px;
   color: #8d8576;
