@@ -21,7 +21,11 @@ function FlowerGarden() {
   return (
     <section className="flower-garden-page">
       <h1>Build Your Own Bouquet</h1>
-      <p>Choose your flowers, pick a vase and create something lovely.</p>
+      <h2>A little corner where flowers bloom and creativity grows.</h2>
+      <p>
+        Choose your favourite flowers, find a vase you love and create a
+        bouquet that's as unique as you are.
+      </p>
 
       <section aria-labelledby="bouquet-heading">
         <h2 id="bouquet-heading">Your bouquet</h2>
