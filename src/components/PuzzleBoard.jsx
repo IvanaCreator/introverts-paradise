@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import DifficultySelector from "./DifficultySelector";
 import PuzzlePiece from "./PuzzlePiece";
+import PuzzleResult from "./PuzzleResult";
 
 const difficulties = [
   { id: "easy", label: "Easy", size: 3 },
@@ -168,15 +169,12 @@ function PuzzleBoard({ puzzle }) {
           : "Piece selected. Choose another piece to swap."}
       </p>
       {isSolved && (
-        <div className="puzzle-complete mt-3" role="status">
-          <h3 className="h5">Congratulations!</h3>
-          <p>
-            You solved the {difficulty.label.toLowerCase()} puzzle in {moves}{" "}
-            moves.
-          </p>
-          <p>You took {formatCompletionTime(elapsedSeconds)} to complete it.</p>
-          <p className="mb-0">Picture: {puzzle.title}</p>
-        </div>
+        <PuzzleResult
+          difficulty={difficulty.label}
+          moves={moves}
+          completionTime={formatCompletionTime(elapsedSeconds)}
+          puzzleTitle={puzzle.title}
+        />
       )}
     </div>
   );
