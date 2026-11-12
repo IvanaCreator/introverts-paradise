@@ -83,7 +83,7 @@ function PuzzleBoard({ puzzle }) {
   };
 
   return (
-    <div className="mt-5">
+    <div className="puzzle-board-section mt-5">
       <h2 className="h4">Choose your difficulty</h2>
       <DifficultySelector
         difficulties={difficulties}
@@ -91,7 +91,7 @@ function PuzzleBoard({ puzzle }) {
         onSelect={selectDifficulty}
       />
 
-      <p>
+      <p className="puzzle-selected-image">
         Selected image: <strong>{puzzle.title}</strong>
       </p>
       <button
@@ -118,7 +118,7 @@ function PuzzleBoard({ puzzle }) {
           />
         ))}
       </div>
-      <p className="mt-3 text-muted">Moves: {moves}</p>
+      <p className="puzzle-moves mt-3">Moves: {moves}</p>
       {isSolved ? (
         <div className="puzzle-complete mt-3" role="status">
           <h3 className="h5">Congratulations!</h3>

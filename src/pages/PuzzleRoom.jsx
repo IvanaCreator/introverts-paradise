@@ -11,15 +11,22 @@ function PuzzleRoom() {
   );
 
   return (
-    <section className="text-center">
+    <section className="puzzle-room-page text-center">
+      <p className="puzzle-room-label">A quiet little challenge</p>
       <h1>Puzzle Room</h1>
-      <p>Choose an image to start your puzzle.</p>
+      <p className="puzzle-room-intro">
+        Choose a picture, pick your difficulty and enjoy a mindful moment of
+        putting it back together.
+      </p>
 
-      <PuzzleCarousel
-        puzzles={puzzles}
-        selectedPuzzleId={selectedPuzzleId}
-        onSelect={setSelectedPuzzleId}
-      />
+      <div className="puzzle-room-panel">
+        <h2 className="puzzle-room-section-title">Choose your picture</h2>
+        <PuzzleCarousel
+          puzzles={puzzles}
+          selectedPuzzleId={selectedPuzzleId}
+          onSelect={setSelectedPuzzleId}
+        />
+      </div>
       <PuzzleBoard key={selectedPuzzle.id} puzzle={selectedPuzzle} />
     </section>
   );
