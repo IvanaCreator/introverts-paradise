@@ -1,0 +1,255 @@
+/* BOOK NOOK */
+
+.book-nook-page h1 {
+  margin-bottom: 12px;
+  color: #68775b;
+}
+
+.book-nook-intro {
+  max-width: 900px;
+  margin-bottom: 44px;
+  color: #777568;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.book-search-section {
+  max-width: 900px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 767px) {
+  .book-search-form {
+    max-width: 100%;
+  }
+
+  .book-search-controls {
+    display: block;
+  }
+
+  .book-search-button {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .book-pagination {
+    flex-wrap: wrap;
+  }
+}
+
+.book-search-section h2,
+.favorites-section {
+  margin-bottom: 36px;
+}
+
+.book-search-section h2,
+.favorites-section h2 {
+  margin-bottom: 10px;
+  color: #68775b;
+  font-size: 30px;
+}
+
+.book-search-section > p,
+.favorites-intro {
+  max-width: 900px;
+  margin-bottom: 22px;
+  color: #8d8576;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.book-search-form {
+  max-width: 720px;
+}
+
+.book-search-controls {
+  max-width: 720px;
+}
+
+.book-search-input {
+  background-color: rgba(255, 253, 247, 0.9);
+  border: 1px solid #d9ddcc;
+  color: #4d5142;
+  font: inherit;
+}
+
+.book-search-input:focus {
+  outline: 2px solid rgba(167, 126, 117, 0.35);
+  border-color: #a77e75;
+}
+
+.book-search-button,
+.book-pagination-button {
+  padding: 11px 18px;
+  background-color: #68775b;
+  border: 1px solid #68775b;
+  border-radius: 10px;
+  color: #fffdf7;
+  font: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.book-search-button:hover,
+.book-pagination-button:hover:not(:disabled) {
+  background-color: #59694f;
+  border-color: #59694f;
+}
+
+.book-search-button:focus-visible,
+.book-pagination-button:focus-visible,
+.book-details-link:focus-visible {
+  outline: 2px solid #a77e75;
+  outline-offset: 3px;
+}
+
+.book-status {
+  margin: 24px 0;
+  color: #6f675e;
+  font-style: italic;
+}
+
+.book-results-count {
+  margin: 24px 0 0;
+  color: #8d8576;
+  font-size: 14px;
+}
+
+.book-favorite-message {
+  width: min(100%, 720px);
+  margin: -20px auto 28px;
+  padding: 12px 18px;
+  border: 1px solid #d9ddcc;
+  border-radius: 12px;
+  background-color: rgba(232, 234, 220, 0.9);
+  color: #68775b;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.book-error {
+  color: #a35f59;
+  font-style: normal;
+}
+
+.book-grid {
+  list-style: none;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: rgba(255, 253, 247, 0.9);
+  border: 1px solid #e4dfd1;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(104, 119, 91, 0.1);
+}
+
+.book-cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 270px;
+  padding: 16px;
+  background-color: #e8eadc;
+  color: #777568;
+  text-align: center;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 270px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0;
+  background-color: rgba(255, 253, 247, 0.78);
+  border: 1px solid rgba(167, 126, 117, 0.45);
+  border-radius: 50%;
+  color: rgba(167, 126, 117, 0.5);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.favorite-button:hover {
+  transform: scale(1.08);
+}
+
+.favorite-button.is-favorite {
+  background-color: rgba(167, 126, 117, 0.95);
+  color: #fffdf7;
+}
+
+.favorite-button:focus-visible {
+  outline: 2px solid #68775b;
+  outline-offset: 3px;
+}
+
+.book-card-content {
+  padding: 20px;
+}
+
+.book-card h2 {
+  margin: 0 0 8px;
+  color: #68775b;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.book-author {
+  margin-bottom: 18px;
+  color: #8d8576;
+  font-style: italic;
+}
+
+.book-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  margin-bottom: 18px;
+  color: #6f675e;
+  font-size: 14px;
+}
+
+.book-details dt {
+  font-weight: bold;
+}
+
+.book-details dd {
+  margin: 0;
+}
+
+.book-details-link {
+  color: #a77e75;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.book-details-link:hover {
+  color: #68775b;
+  text-decoration: underline;
+}
+
+.book-pagination-button:disabled {
+  background-color: #d9ddcc;
+  border-color: #d9ddcc;
+  color: #777568;
+  cursor: default;
+}

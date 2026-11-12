@@ -1,0 +1,200 @@
+/* FLOWER GARDEN */
+
+.flower-garden-page {
+  color: #6f675e;
+}
+
+.flower-garden-page h1,
+.flower-garden-page h2 {
+  color: #68775b;
+}
+
+.flower-garden-page section {
+  margin: 32px 0;
+}
+
+.flower-choice,
+.vase-choice {
+  align-items: center;
+  padding: 14px;
+  background-color: rgba(255, 253, 247, 0.9);
+  border: 1px solid #e4dfd1;
+  border-radius: 14px;
+  color: #68775b;
+  cursor: pointer;
+}
+
+.flower-choice img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+
+.vase-choice img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  transform: scaleX(var(--vase-scale));
+  transform-origin: center;
+}
+
+.vase-choice.is-selected {
+  border-color: #a77e75;
+  box-shadow: 0 0 0 3px rgba(167, 126, 117, 0.2);
+}
+
+.bouquet-stage {
+  position: relative;
+  min-height: 470px;
+  max-width: 560px;
+  margin: 20px auto;
+  overflow: hidden;
+  background-color: rgba(232, 234, 220, 0.7);
+  border-radius: 24px;
+  text-align: center;
+}
+
+.bouquet-stage > p {
+  padding-top: 40px;
+}
+
+.bouquet-debug-points {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  top: var(--flower-area-top);
+  right: var(--flower-area-right);
+  bottom: var(--flower-area-bottom);
+  left: var(--flower-area-left);
+  pointer-events: none;
+}
+
+.bouquet-debug-point {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #e63946;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #e63946;
+}
+
+.bouquet-debug-point-top-left {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.bouquet-debug-point-top-right {
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.bouquet-debug-point-bottom-left {
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+}
+
+.bouquet-debug-point-bottom-right {
+  right: 0;
+  bottom: 0;
+  transform: translate(50%, 50%);
+}
+
+.bouquet-boundary-debug {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  top: var(--flower-boundary);
+  right: 8%;
+  left: 8%;
+  border-top: 3px solid #1976d2;
+  pointer-events: none;
+}
+
+.bouquet-boundary-point {
+  position: absolute;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #1976d2;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #1976d2;
+  transform: translateY(-50%);
+}
+
+.bouquet-boundary-point-left {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.bouquet-boundary-point-right {
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.bouquet-origin-debug {
+  display: none;
+  position: absolute;
+  z-index: 5;
+  top: var(--flower-origin-top);
+  left: var(--flower-origin-left);
+  width: 14px;
+  height: 14px;
+  background-color: #2e9d54;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #2e9d54;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.bouquet-vase {
+  position: absolute;
+  z-index: 2;
+  bottom: -12px;
+  left: 50%;
+  width: 320px;
+  height: 260px;
+  object-fit: contain;
+  transform: translateX(-50%) scaleX(var(--vase-scale));
+}
+
+.bouquet-flowers {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% var(--flower-boundary),
+    0 var(--flower-boundary)
+  );
+}
+
+.bouquet-flowers img {
+  position: absolute;
+  bottom: calc(
+    100% - var(--flower-origin-top) - var(--flower-vertical-offset)
+  );
+  left: calc(
+    var(--flower-origin-left) +
+      (var(--flower-slot) - (var(--flower-slots) - 1) / 2) *
+      var(--flower-spacing) + var(--flower-horizontal-offset)
+  );
+  width: var(--flower-size);
+  height: 220px;
+  object-fit: contain;
+  transform: translateX(-50%)
+    rotate(
+      calc(
+        (var(--flower-slot) - (var(--flower-slots) - 1) / 2) *
+          var(--flower-angle) * 1deg
+      )
+    );
+  transform-origin: bottom center;
+}
