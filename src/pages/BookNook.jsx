@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-import BookCard from "../components/BookCard";
+import BookResults from "../components/BookResults";
 import BookSearch from "../components/BookSearch";
+import FavoritesSection from "../components/FavoritesSection";
 
 const OPEN_LIBRARY_URL = "https://openlibrary.org/search.json";
 const BOOKS_PER_PAGE = 15;
@@ -53,10 +54,23 @@ function BookNook() {
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [favoriteMessage, setFavoriteMessage] = useState("");
 
   useEffect(() => {
     localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    if (!favoriteMessage) {
+      return undefined;
+    }
+
+    const timeout = setTimeout(() => {
+      setFavoriteMessage("");
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [favoriteMessage]);
 
   useEffect(() => {
     if (!searchTerm) {
@@ -110,12 +124,20 @@ function BookNook() {
   }
 
   function handleToggleFavorite(book) {
+    const bookTitle = book.title || "This book";
+    const alreadyFavorite = isFavorite(book);
+
+    setFavoriteMessage(
+      alreadyFavorite
+        ? `${bookTitle} was removed from your favorites.`
+        : `${bookTitle} was added to your favorites.`,
+    );
     setFavorites((currentFavorites) => {
-      const isFavorite = currentFavorites.some(
+      const isAlreadyFavorite = currentFavorites.some(
         (favorite) => favorite.key === book.key
       );
 
-      if (isFavorite) {
+      if (isAlreadyFavorite) {
         return currentFavorites.filter((favorite) => favorite.key !== book.key);
       }
 
@@ -134,6 +156,11 @@ function BookNook() {
         Discover new stories, find your next favourite read and get lost in
         the magic of books.
       </p>
+      {favoriteMessage && (
+        <p className="book-favorite-message" role="status" aria-live="polite">
+          {favoriteMessage}
+        </p>
+      )}
 
       <section className="book-search-section" aria-labelledby="search-heading">
         <h2 id="search-heading">Find your next little escape</h2>
@@ -149,90 +176,23 @@ function BookNook() {
       </section>
 
       <div className="book-results">
-        {isLoading && <p className="book-status">Loading books...</p>}
-        {error && <p className="book-status book-error">{error}</p>}
-
-        {!isLoading && !error && (
-          <>
-            {searchTerm && books.length === 0 && (
-              <p className="book-status">No books found.</p>
-            )}
-
-            {books.length > 0 && (
-              <>
-                <ul className="book-grid row g-4 list-unstyled p-0 mt-4 mb-4">
-                  {books.map((book) => (
-                    <BookCard
-                      key={book.key}
-                      book={book}
-                      isFavorite={isFavorite(book)}
-                      onToggleFavorite={handleToggleFavorite}
-                    />
-                  ))}
-                </ul>
-
-                <nav
-                  className="book-pagination pagination justify-content-center gap-2 my-4"
-                  aria-label="Book search pages"
-                >
-                <button
-                  className="btn book-pagination-button"
-                  type="button"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-
-                {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-                  (page) => (
-                    <button
-                      className="btn book-pagination-button"
-                      key={page}
-                      type="button"
-                      onClick={() => handlePageChange(page)}
-                      disabled={currentPage === page}
-                    >
-                      {page}
-                    </button>
-                  )
-                )}
-
-                <button
-                  className="btn book-pagination-button"
-                  type="button"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-                </nav>
-              </>
-            )}
-          </>
-        )}
+        <BookResults
+          isLoading={isLoading}
+          error={error}
+          searchTerm={searchTerm}
+          books={books}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          isFavorite={isFavorite}
+          onToggleFavorite={handleToggleFavorite}
+          onPageChange={handlePageChange}
+        />
       </div>
 
-      <section className="favorites-section" aria-labelledby="favorites-heading">
-        <h2 id="favorites-heading">My favorites</h2>
-        <p className="favorites-intro">
-          A collection of stories that caught my heart.
-        </p>
-        {favorites.length > 0 ? (
-          <ul className="book-grid row g-4 list-unstyled p-0 mt-4 mb-4">
-            {favorites.map((book) => (
-              <BookCard
-                key={book.key}
-                book={book}
-                isFavorite={true}
-                onToggleFavorite={handleToggleFavorite}
-              />
-            ))}
-          </ul>
-        ) : (
-          <p className="book-status">You have no favorite books yet.</p>
-        )}
-      </section>
+      <FavoritesSection
+        favorites={favorites}
+        onToggleFavorite={handleToggleFavorite}
+      />
     </section>
   );
 }

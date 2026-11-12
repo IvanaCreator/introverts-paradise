@@ -162,7 +162,6 @@
   color: #777568;
   font-size: 20px;
   line-height: 1.7;
-  white-space: nowrap;
 }
 
 .book-search-section {
@@ -189,18 +188,10 @@
   color: #8d8576;
   font-size: 18px;
   line-height: 1.7;
-  white-space: nowrap;
 }
 
 .book-search-form {
   max-width: 720px;
-}
-
-.book-search-form label {
-  color: #6f675e;
-  font-size: 15px;
-  font-weight: bold;
-  white-space: nowrap;
 }
 
 .book-search-controls {
@@ -250,6 +241,25 @@
   margin: 24px 0;
   color: #6f675e;
   font-style: italic;
+}
+
+.book-results-count {
+  margin: 24px 0 0;
+  color: #8d8576;
+  font-size: 14px;
+}
+
+.book-favorite-message {
+  width: min(100%, 720px);
+  margin: -20px auto 28px;
+  padding: 12px 18px;
+  border: 1px solid #d9ddcc;
+  border-radius: 12px;
+  background-color: rgba(232, 234, 220, 0.9);
+  color: #68775b;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .book-error {
@@ -874,12 +884,6 @@
 
   .book-search-form {
     max-width: 100%;
-  }
-
-  .book-nook-intro,
-  .book-search-section > p,
-  .favorites-intro {
-    white-space: normal;
   }
 
   .book-search-controls {
