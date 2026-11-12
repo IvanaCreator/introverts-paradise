@@ -1,26 +1,28 @@
+import { getPublicAsset } from "../utils/assets";
+
 export const flowers = [
-  { id: "red-rose", name: "Red rose", image: "/flowers/red-rose.png" },
-  { id: "blue-rose", name: "Blue rose", image: "/flowers/blue-rose.png" },
-  { id: "orange-tulip", name: "Orange tulip", image: "/flowers/orange-tulip.png" },
-  { id: "pink-tulip", name: "Pink tulip", image: "/flowers/pink-tulip.png" },
-  { id: "daisy", name: "Daisy", image: "/flowers/daisy.png" },
-  { id: "lavender", name: "Lavender", image: "/flowers/lavender.png" },
-  { id: "peony", name: "Peony", image: "/flowers/peony.png" },
+  { id: "red-rose", name: "Red rose", image: getPublicAsset("flowers/red-rose.png") },
+  { id: "blue-rose", name: "Blue rose", image: getPublicAsset("flowers/blue-rose.png") },
+  { id: "orange-tulip", name: "Orange tulip", image: getPublicAsset("flowers/orange-tulip.png") },
+  { id: "pink-tulip", name: "Pink tulip", image: getPublicAsset("flowers/pink-tulip.png") },
+  { id: "daisy", name: "Daisy", image: getPublicAsset("flowers/daisy.png") },
+  { id: "lavender", name: "Lavender", image: getPublicAsset("flowers/lavender.png") },
+  { id: "peony", name: "Peony", image: getPublicAsset("flowers/peony.png") },
   {
     id: "lily",
     name: "Lily",
-    image: "/flowers/lily.png",
+    image: getPublicAsset("flowers/lily.png"),
     verticalOffset: "18px",
     horizontalOffset: "12px",
   },
-  { id: "white-flower", name: "White flower", image: "/flowers/white-flower.png" },
+  { id: "white-flower", name: "White flower", image: getPublicAsset("flowers/white-flower.png") },
 ];
 
 export const vases = [
   {
     id: "beige-vase",
     name: "Beige vase",
-    image: "/vases/beige-ceramic-vase.png",
+    image: getPublicAsset("vases/beige-ceramic-vase.png"),
     flowerArea: { top: "7%", right: "46%", bottom: "30%", left: "46%" },
     flowerSize: "88px",
     flowerSpacing: "8px",
@@ -33,7 +35,7 @@ export const vases = [
   {
     id: "flower-vase",
     name: "Flower vase",
-    image: "/vases/ornate-blue-porcelain-vase.png",
+    image: getPublicAsset("vases/ornate-blue-porcelain-vase.png"),
     flowerArea: { top: "9%", right: "44%", bottom: "30%", left: "44%" },
     flowerSize: "110px",
     flowerSpacing: "14px",
@@ -46,8 +48,7 @@ export const vases = [
   {
     id: "blue-vase",
     name: "Blue vase",
-    image:
-      "/vases/blue-glazed-ceramic-vase.png",
+    image: getPublicAsset("vases/blue-glazed-ceramic-vase.png"),
     flowerArea: { top: "12%", right: "45%", bottom: "30%", left: "45%" },
     flowerSize: "115px",
     flowerSpacing: "16px",

@@ -1,42 +1,44 @@
+import { getPublicAsset } from "../utils/assets";
+
 export const puzzles = [
   {
     id: "sea",
     title: "Sea",
-    image: "/puzzles/sea.jpeg",
+    image: getPublicAsset("puzzles/sea.jpeg"),
   },
   {
     id: "cat",
     title: "Cat",
-    image: "/puzzles/cat.jpeg",
+    image: getPublicAsset("puzzles/cat.jpeg"),
   },
   {
     id: "meadow",
     title: "Meadow",
-    image: "/puzzles/meadow.jpeg",
+    image: getPublicAsset("puzzles/meadow.jpeg"),
   },
   {
     id: "mountains",
     title: "Mountains",
-    image: "/puzzles/mountains.jpeg",
+    image: getPublicAsset("puzzles/mountains.jpeg"),
   },
   {
     id: "beach",
     title: "Beach",
-    image: "/puzzles/beach.jpeg",
+    image: getPublicAsset("puzzles/beach.jpeg"),
   },
   {
     id: "autumn",
     title: "Autumn",
-    image: "/puzzles/autumn.jpeg",
+    image: getPublicAsset("puzzles/autumn.jpeg"),
   },
   {
     id: "bouquet",
     title: "Bouquet",
-    image: "/puzzles/bouquet.jpeg",
+    image: getPublicAsset("puzzles/bouquet.jpeg"),
   },
   {
     id: "door",
     title: "Door",
-    image: "/puzzles/door.jpeg",
+    image: getPublicAsset("puzzles/door.jpeg"),
   },
 ];

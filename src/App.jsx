@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getPublicAsset } from "./utils/assets";
 
 import Navbar from "./components/Navbar";
 
@@ -19,6 +20,10 @@ function App() {
 
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
+    document.documentElement.style.setProperty(
+      "--home-background-image",
+      `url("${getPublicAsset("home-background.jpeg")}")`,
+    );
   }, [isDarkMode]);
 
   return (

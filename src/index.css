@@ -6,7 +6,7 @@ body {
   margin: 0;
   background:
     linear-gradient(var(--page-overlay), var(--page-overlay)),
-    url("/home-background.jpeg") center / cover fixed;
+    var(--home-background-image) center / cover fixed;
   color: var(--text-color);
   font-family: Georgia, serif;
 }

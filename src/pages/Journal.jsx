@@ -5,6 +5,7 @@ import JournalEntryForm from "../components/JournalEntryForm";
 import JournalCalendar from "../components/JournalCalendar";
 import JournalHistory from "../components/JournalHistory";
 import MoodChart from "../components/MoodChart";
+import { getPublicAsset } from "../utils/assets";
 
 const JOURNAL_STORAGE_KEY = "introverts-paradise-journal";
 const BUCKET_LIST_STORAGE_KEY = "introverts-paradise-bucket-list";
@@ -136,7 +137,7 @@ function Journal() {
       <div className="journal-feature-row journal-writing-row">
         <div className="journal-image-frame">
           <img
-            src="/open-journal.jpeg"
+            src={getPublicAsset("open-journal.jpeg")}
             alt="An open journal ready for writing"
           />
         </div>
@@ -168,7 +169,10 @@ function Journal() {
         />
 
         <div className="journal-image-frame">
-          <img src="/closed-journal.jpeg" alt="A closed journal" />
+          <img
+            src={getPublicAsset("closed-journal.jpeg")}
+            alt="A closed journal"
+          />
         </div>
       </div>
 

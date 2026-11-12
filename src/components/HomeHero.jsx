@@ -1,3 +1,5 @@
+import { getPublicAsset } from "../utils/assets";
+
 function HomeHero() {
   return (
     <section className="welcome-section">
@@ -13,7 +15,10 @@ function HomeHero() {
       </div>
 
       <div className="welcome-image-frame">
-        <img src="/welcome.jpeg" alt="A warm and cozy home interior" />
+        <img
+          src={getPublicAsset("welcome.jpeg")}
+          alt="A warm and cozy home interior"
+        />
       </div>
     </section>
   );
