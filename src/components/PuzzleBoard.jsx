@@ -6,6 +6,24 @@ const difficulties = [
   { id: "hard", label: "Hard", size: 5 },
 ];
 
+function createShuffledPieces(size) {
+  const pieces = Array.from({ length: size * size }, (_, index) => ({
+    id: index,
+    row: Math.floor(index / size),
+    column: index % size,
+  }));
+
+  for (let index = pieces.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [pieces[index], pieces[randomIndex]] = [
+      pieces[randomIndex],
+      pieces[index],
+    ];
+  }
+
+  return pieces;
+}
+
 function PuzzleBoard({ puzzle }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState(
     difficulties[0].id,
@@ -13,14 +31,18 @@ function PuzzleBoard({ puzzle }) {
   const difficulty = difficulties.find(
     (option) => option.id === selectedDifficulty,
   );
-  const pieces = Array.from(
-    { length: difficulty.size * difficulty.size },
-    (_, index) => ({
-      id: index,
-      row: Math.floor(index / difficulty.size),
-      column: index % difficulty.size,
-    }),
+  const [pieces, setPieces] = useState(() =>
+    createShuffledPieces(difficulty.size),
   );
+
+  const shufflePieces = () => {
+    setPieces(createShuffledPieces(difficulty.size));
+  };
+
+  const selectDifficulty = (option) => {
+    setSelectedDifficulty(option.id);
+    setPieces(createShuffledPieces(option.size));
+  };
 
   return (
     <div className="mt-5">
@@ -39,7 +61,7 @@ function PuzzleBoard({ puzzle }) {
             }`}
             type="button"
             key={option.id}
-            onClick={() => setSelectedDifficulty(option.id)}
+            onClick={() => selectDifficulty(option)}
             aria-pressed={selectedDifficulty === option.id}
           >
             {option.label} ({option.size} × {option.size})
@@ -50,6 +72,13 @@ function PuzzleBoard({ puzzle }) {
       <p>
         Selected image: <strong>{puzzle.title}</strong>
       </p>
+      <button
+        className="btn btn-outline-dark mb-3"
+        type="button"
+        onClick={shufflePieces}
+      >
+        Shuffle pieces
+      </button>
       <div
         className="puzzle-board mx-auto"
         style={{ "--puzzle-size": difficulty.size }}
@@ -79,8 +108,8 @@ function PuzzleBoard({ puzzle }) {
         })}
       </div>
       <p className="mt-3 text-muted">
-        The {difficulty.size} × {difficulty.size} pieces are currently in their
-        original order.
+        The {difficulty.size} × {difficulty.size} pieces are shuffled and ready
+        to solve.
       </p>
     </div>
   );

@@ -20,7 +20,7 @@ function PuzzleRoom() {
         selectedPuzzleId={selectedPuzzleId}
         onSelect={setSelectedPuzzleId}
       />
-      <PuzzleBoard puzzle={selectedPuzzle} />
+      <PuzzleBoard key={selectedPuzzle.id} puzzle={selectedPuzzle} />
     </section>
   );
 }
