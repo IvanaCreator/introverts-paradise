@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import DifficultySelector from "./DifficultySelector";
+import PuzzlePiece from "./PuzzlePiece";
+
 const difficulties = [
   { id: "easy", label: "Easy", size: 3 },
   { id: "medium", label: "Medium", size: 4 },
@@ -82,27 +85,11 @@ function PuzzleBoard({ puzzle }) {
   return (
     <div className="mt-5">
       <h2 className="h4">Choose your difficulty</h2>
-      <div
-        className="btn-group mb-4"
-        role="group"
-        aria-label="Puzzle difficulty"
-      >
-        {difficulties.map((option) => (
-          <button
-            className={`btn ${
-              selectedDifficulty === option.id
-                ? "btn-dark"
-                : "btn-outline-dark"
-            }`}
-            type="button"
-            key={option.id}
-            onClick={() => selectDifficulty(option)}
-            aria-pressed={selectedDifficulty === option.id}
-          >
-            {option.label} ({option.size} × {option.size})
-          </button>
-        ))}
-      </div>
+      <DifficultySelector
+        difficulties={difficulties}
+        selectedDifficulty={selectedDifficulty}
+        onSelect={selectDifficulty}
+      />
 
       <p>
         Selected image: <strong>{puzzle.title}</strong>
@@ -119,32 +106,17 @@ function PuzzleBoard({ puzzle }) {
         style={{ "--puzzle-size": difficulty.size }}
         aria-label={`${puzzle.title} puzzle board`}
       >
-        {pieces.map((piece, pieceIndex) => {
-          const position = difficulty.size - 1;
-          const backgroundPosition = `${(piece.column / position) * 100}% ${
-            (piece.row / position) * 100
-          }%`;
-
-          return (
-            <button
-              className={`puzzle-piece ${
-                selectedPieceIndex === pieceIndex ? "puzzle-piece-selected" : ""
-              }`}
-              key={piece.id}
-              type="button"
-              onClick={() => handlePieceClick(pieceIndex)}
-              aria-pressed={selectedPieceIndex === pieceIndex}
-              aria-label={`Puzzle piece ${piece.id + 1}`}
-              style={{
-                backgroundImage: `url(${puzzle.image})`,
-                backgroundPosition,
-                backgroundSize: `${difficulty.size * 100}% ${
-                  difficulty.size * 100
-                }%`,
-              }}
-            />
-          );
-        })}
+        {pieces.map((piece, pieceIndex) => (
+          <PuzzlePiece
+            key={piece.id}
+            piece={piece}
+            pieceIndex={pieceIndex}
+            size={difficulty.size}
+            image={puzzle.image}
+            isSelected={selectedPieceIndex === pieceIndex}
+            onClick={handlePieceClick}
+          />
+        ))}
       </div>
       <p className="mt-3 text-muted">Moves: {moves}</p>
       {isSolved ? (
