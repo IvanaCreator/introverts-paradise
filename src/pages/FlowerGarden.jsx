@@ -16,7 +16,6 @@ function FlowerGarden() {
 
   function handleReset() {
     setBouquetFlowers([]);
-    setSelectedVaseId(vases[0].id);
   }
 
   return (
