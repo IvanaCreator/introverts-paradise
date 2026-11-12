@@ -67,9 +67,10 @@ function PuzzleBoard({ puzzle }) {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const isSolved =
     moves > 0 && pieces.every((piece, pieceIndex) => piece.id === pieceIndex);
+  const isTimerRunning = moves > 0 && !isSolved;
 
   useEffect(() => {
-    if (isSolved) {
+    if (!isTimerRunning) {
       return undefined;
     }
 
@@ -78,7 +79,7 @@ function PuzzleBoard({ puzzle }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isSolved]);
+  }, [isTimerRunning]);
 
   const startNewGame = () => {
     setPieces(createShuffledPieces(difficulty.size));
