@@ -36,6 +36,8 @@ function PuzzleBoard({ puzzle }) {
   );
   const [selectedPieceIndex, setSelectedPieceIndex] = useState(null);
   const [moves, setMoves] = useState(0);
+  const isSolved =
+    moves > 0 && pieces.every((piece, pieceIndex) => piece.id === pieceIndex);
 
   const shufflePieces = () => {
     setPieces(createShuffledPieces(difficulty.size));
@@ -51,6 +53,10 @@ function PuzzleBoard({ puzzle }) {
   };
 
   const handlePieceClick = (pieceIndex) => {
+    if (isSolved) {
+      return;
+    }
+
     if (selectedPieceIndex === null) {
       setSelectedPieceIndex(pieceIndex);
       return;
@@ -141,9 +147,16 @@ function PuzzleBoard({ puzzle }) {
         })}
       </div>
       <p className="mt-3 text-muted">Moves: {moves}</p>
-      <p className="text-muted">
-        Select two pieces to swap their positions.
-      </p>
+      {isSolved ? (
+        <div className="puzzle-complete mt-3" role="status">
+          <h3 className="h5">Congratulations!</h3>
+          <p>You solved the puzzle in {moves} moves.</p>
+        </div>
+      ) : (
+        <p className="text-muted">
+          Select two pieces to swap their positions.
+        </p>
+      )}
     </div>
   );
 }
