@@ -150,7 +150,7 @@ function PuzzleBoard({ puzzle }) {
       >
         {pieces.map((piece, pieceIndex) => (
           <PuzzlePiece
-            key={piece.id}
+            key={pieceIndex}
             piece={piece}
             pieceIndex={pieceIndex}
             size={difficulty.size}
