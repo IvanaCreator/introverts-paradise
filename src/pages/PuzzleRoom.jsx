@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import PuzzleBoard from "../components/PuzzleBoard";
-import PuzzleSelector from "../components/PuzzleSelector";
+import PuzzleCarousel from "../components/PuzzleCarousel";
 import { puzzles } from "../data/puzzles";
 
 function PuzzleRoom() {
@@ -15,7 +15,7 @@ function PuzzleRoom() {
       <h1>Puzzle Room</h1>
       <p>Choose an image to start your puzzle.</p>
 
-      <PuzzleSelector
+      <PuzzleCarousel
         puzzles={puzzles}
         selectedPuzzleId={selectedPuzzleId}
         onSelect={setSelectedPuzzleId}

@@ -863,3 +863,86 @@
   border-radius: 0.5rem;
   background-color: rgb(244 227 191 / 75%);
 }
+
+.puzzle-carousel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
+.puzzle-carousel-window {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.puzzle-carousel-track {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.puzzle-carousel-card {
+  flex: 0 0 25%;
+  min-width: 0;
+  padding: 0.35rem;
+}
+
+.puzzle-carousel-button {
+  display: block;
+  width: 100%;
+  padding: 0.45rem;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 55%);
+  color: #463020;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.puzzle-carousel-button:hover {
+  transform: translateY(-2px);
+}
+
+.puzzle-carousel-button-selected {
+  border-color: #6f5744;
+  box-shadow: 0 0 0 2px #f4e3bf;
+}
+
+.puzzle-carousel-button img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.35rem;
+}
+
+.puzzle-carousel-button span {
+  display: block;
+  margin-top: 0.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.puzzle-carousel-arrow {
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid #6f5744;
+  border-radius: 50%;
+  background: #f4e3bf;
+  color: #463020;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.puzzle-carousel-arrow:not(:disabled) {
+  cursor: pointer;
+}
+
+.puzzle-carousel-arrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
