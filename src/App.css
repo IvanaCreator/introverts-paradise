@@ -1043,11 +1043,6 @@
   min-height: 24px;
 }
 
-.puzzle-moves {
-  color: #68775b;
-  font-weight: bold;
-}
-
 .puzzle-piece {
   min-width: 0;
   aspect-ratio: 1;

@@ -31,6 +31,7 @@ function PuzzleCarousel({ puzzles, selectedPuzzleId, onSelect }) {
   return (
     <div
       className="puzzle-carousel mt-4"
+      role="region"
       aria-label="Puzzle image selection"
     >
       <button
