@@ -49,7 +49,7 @@ function PuzzleCarousel({ puzzles, selectedPuzzleId, onSelect }) {
           className="puzzle-carousel-track"
           style={{
             transform: `translateX(-${
-              currentStartIndex * (100 / puzzles.length)
+              currentStartIndex * (100 / visiblePuzzles)
             }%)`,
           }}
         >
