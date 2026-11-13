@@ -298,3 +298,40 @@
   width: 100%;
   min-height: 320px;
 }
+
+@media (max-width: 767px) {
+  .journal-feature-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .journal-writing-row .journal-image-frame {
+    order: 0;
+  }
+
+  .journal-writing-row .journal-form {
+    order: 1;
+    width: 100%;
+  }
+
+  .journal-history-row .journal-history {
+    order: 0;
+    width: 100%;
+  }
+
+  .journal-history-row .journal-image-frame {
+    order: 1;
+  }
+
+  .journal-image-frame {
+    width: min(100%, 300px);
+    height: 220px;
+  }
+
+  .journal-section-intro {
+    width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
